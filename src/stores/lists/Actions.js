@@ -8,14 +8,18 @@ export const apiGetCategories = (email, password) => async dispatch => {
         payload: axios.get(API+'categories/getAll')
     })
 }
+
+
 export const apiGetRestaurantsByNearMe = (lat, long) => async dispatch => {
     return await dispatch({
         type: ACTION_TYPES.API_GET_RESTAURENTS_BY_NEAR_ME,
-        payload: axios.get(API+'/restaurant/nearMe/', {
-            params: {
-                lat:long,
-                long:long
-            }
-        })
+        payload: axios.get(API+'restaurant/nearMe/'+lat+'&'+long)
+    })
+};
+
+export const setMyGeoLocation = (geolocation) =>  dispatch => {
+    return dispatch({
+        type: ACTION_TYPES.GEOLOCATION,
+        payload: geolocation
     })
 }

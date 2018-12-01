@@ -5,56 +5,71 @@ import {
     Text,
     FlatList,
     Image,
-    TouchableOpacity, StyleSheet
+    TouchableOpacity, StyleSheet,
+    Dimensions
 } from 'react-native'
-import {apiGetCategories} from "../../../stores/lists/Actions";
+
+import {apiGetRestaurantsByNearMe} from "../../../stores/lists/Actions";
 import {SIZE} from "../../../configs/Const";
 import {headerStyles} from "../../Header";
-import {getGeolocation} from "../../../configs/Geolocation";
+const winSize = Dimensions.get('window');
 
 type TProps = {
-    categoriesState?: any;
-    apiGetCategories?: Function;
+    restaurantsNearMeState?: any;
+    myGeolocationState?: any;
+    apiGetRestaurantsByNearMe?: Function;
 }
 class ListRestaurantsByNearMe extends React.Component<TProps> {
 
     constructor(props) {
         super(props)
-        getGeolocation(result => {
-            console.log(result)
-        })
-
     }
 
-    componentDidMount(): void {
-
-        this.props.apiGetCategories()
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+        if (prevProps.myGeolocationState !== this.props.myGeolocationState){
+            this.props.apiGetRestaurantsByNearMe(
+                this.props.myGeolocationState.latitude,
+                this.props.myGeolocationState.longitude
+            )
+        }
     }
 
     resItem = (item)=> (
         <View style={{
-            marginBottom: SIZE["16"]
+            marginBottom: SIZE["16"],
+            position:"relative"
         }}>
-            <TouchableOpacity>
-                <Image style={{
-                    width: SIZE["64"],
-                    height: SIZE["64"],
-                    borderRadius: SIZE["64"]
-                }} source={{uri: item.image}}/>
+            <Image style={{
+                width: winSize.width,
+                height: winSize.width*0.7,
+                borderRadius: SIZE["4"],
+            }} source={{uri: item.RESTAURANT.image}}/>
+
+            <View style={{
+                position: 'absolute',
+                bottom: SIZE["16"],
+                left: SIZE["16"],
+                right: SIZE["16"],
+                backgroundColor: '#fff',
+                padding: SIZE["32"],
+                borderRadius: SIZE["8"],
+            }}>
                 <Text style={{
                     textAlign: 'center',
                     fontSize: 12
-                }}>{item.name}</Text>
-            </TouchableOpacity>
+                }}>{item.RESTAURANT.name}</Text>
+            </View>
+
         </View>
     )
+
     _keyExtractor = (item, index) => item.id+"";
 
     renderListRes = () => {
-        if (this.props.categoriesState.length > 0){
+        if (this.props.restaurantsNearMeState.length > 0){
             return (
                 <FlatList
-                    data={this.props.categoriesState}
+                    data={this.props.restaurantsNearMeState}
                     renderItem={({item}) => this.resItem(item)}
                     keyExtractor={this._keyExtractor}/>
             )
@@ -68,7 +83,7 @@ class ListRestaurantsByNearMe extends React.Component<TProps> {
             }}>
 
                 <Text style={[restaurantStyles.listViewTitle, headerStyles.fontWeightBold]}>
-                    NEAR ME
+                    NEAR ME!
                 </Text>
                 <View style={{
                     marginRight: SIZE["24"],
@@ -93,11 +108,12 @@ const restaurantStyles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    categoriesState: state.lists.categoriesState
+    restaurantsNearMeState: state.lists.restaurantsNearMeState,
+    myGeolocationState: state.lists.myGeolocationState
 });
 
 const mapDispatchToProps = {
-    apiGetCategories
+    apiGetRestaurantsByNearMe
 }
 
 export default connect(

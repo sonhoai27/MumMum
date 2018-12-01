@@ -8,6 +8,8 @@ import {
 import {apiLogin} from "../stores/auth/Actions";
 import {_retrieveData, _storeData} from "../configs/LocalStorage";
 import Home from "./Screens";
+import {getGeolocation} from "../configs/Geolocation";
+import {setMyGeoLocation} from "../stores/lists/Actions";
 
 class Root extends React.Component {
 
@@ -16,6 +18,9 @@ class Root extends React.Component {
     }
 
     componentDidMount(): void {
+        getGeolocation(result => {
+            this.props.setMyGeoLocation(result)
+        });
         //this.props.apiLogin('linhnguyen1512286@gmail.com', '123')
         _retrieveData("@LOGIN", (result) => {
             console.log(result)
@@ -50,7 +55,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    apiLogin
+    apiLogin,
+    setMyGeoLocation
 }
 
 export default connect(
