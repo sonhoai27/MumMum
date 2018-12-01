@@ -1,4 +1,4 @@
-import {ACTION_TYPES} from "./Types";
+import {ACTION_TYPES} from "./AuthTypes";
 import {FAILURE, REQUEST, SUCCESS} from "../../configs/ActionTypeUtil";
 
 const initialState = {

@@ -5,10 +5,9 @@ import {
     StatusBar,
     SafeAreaView
 } from 'react-native'
-import {apiLogin} from "../stores/auth/Actions";
+import {apiLogin} from "../stores/auth/AuthActions";
 import {_retrieveData, _storeData} from "../configs/LocalStorage";
 import Home from "./Screens";
-import {getGeolocation} from "../configs/Geolocation";
 import {setMyGeoLocation} from "../stores/lists/Actions";
 
 class Root extends React.Component {
@@ -18,9 +17,10 @@ class Root extends React.Component {
     }
 
     componentDidMount(): void {
-        getGeolocation(result => {
-            this.props.setMyGeoLocation(result)
-        });
+            this.props.setMyGeoLocation({
+                latitude: '10.773533',
+                longitude: '106.702899'
+            })
         //this.props.apiLogin('linhnguyen1512286@gmail.com', '123')
         _retrieveData("@LOGIN", (result) => {
             console.log(result)

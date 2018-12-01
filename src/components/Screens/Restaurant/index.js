@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 
 import {apiGetRestaurantsByNearMe} from "../../../stores/lists/Actions";
-import {SIZE} from "../../../configs/Const";
+import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
 import {headerStyles} from "../../Header";
 const winSize = Dimensions.get('window');
 
@@ -40,9 +40,9 @@ class ListRestaurantsByNearMe extends React.Component<TProps> {
             position:"relative"
         }}>
             <Image style={{
-                width: winSize.width,
+                width: winSize.width-48,
                 height: winSize.width*0.7,
-                borderRadius: SIZE["4"],
+                borderRadius: SIZE["8"],
             }} source={{uri: item.RESTAURANT.image}}/>
 
             <View style={{
@@ -50,14 +50,22 @@ class ListRestaurantsByNearMe extends React.Component<TProps> {
                 bottom: SIZE["16"],
                 left: SIZE["16"],
                 right: SIZE["16"],
-                backgroundColor: '#fff',
-                padding: SIZE["32"],
+                backgroundColor: PRIMARY_COLOR,
+                padding: SIZE["16"],
                 borderRadius: SIZE["8"],
             }}>
                 <Text style={{
-                    textAlign: 'center',
-                    fontSize: 12
+                    textAlign: 'left',
+                    fontSize: 16,
+                    color: '#fff',
+                    fontWeight: 'bold'
                 }}>{item.RESTAURANT.name}</Text>
+                <Text style={{
+                    textAlign: 'left',
+                    fontSize: 14,
+                    color: '#fff',
+                    marginTop: 4
+                }}>{item.street}</Text>
             </View>
 
         </View>
@@ -74,7 +82,6 @@ class ListRestaurantsByNearMe extends React.Component<TProps> {
                     keyExtractor={this._keyExtractor}/>
             )
         }
-        return <Text>NULL</Text>
     }
     render() {
         return (

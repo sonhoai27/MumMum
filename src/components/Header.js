@@ -29,10 +29,7 @@ class Header extends React.Component<TProps> {
             <View>
                 <View style={{
                     backgroundColor: '#fff',
-                    paddingTop: 32,
-                    paddingLeft: 24,
-                    paddingRight: 24,
-                    paddingBottom: 40
+                    padding: 24,
                 }}>
 
 

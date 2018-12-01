@@ -56,7 +56,6 @@ class ListCategories extends React.Component<TProps> {
                     keyExtractor={this._keyExtractor}/>
             )
         }
-        return <Text>NULL</Text>
     }
     render() {
         return (

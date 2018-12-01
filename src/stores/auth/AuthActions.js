@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {ACTION_TYPES} from "./Types";
+import {ACTION_TYPES} from "./AuthTypes";
 import {API} from "../../configs/Const";
 
 export const apiLogin = (email, password) => async dispatch => {
