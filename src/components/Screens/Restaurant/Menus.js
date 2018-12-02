@@ -2,17 +2,21 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {
     View,
-    Text, ScrollView, TouchableWithoutFeedback, Image, FlatList
+    Text,
+    ScrollView,
+    TouchableWithoutFeedback,
+    Image, FlatList,
+    TouchableOpacity
 } from 'react-native'
 import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
-import Header from "../../Header";
+import { addIcon, headerStyles } from "../../Header";
 import {getMenusRes} from "../../../stores/lists/ListActions";
-import {winSize} from "./index";
+import {winSize} from "./NearMe";
 
 type CategoryProps = {
     navigation: any;
     getMenusRes?: Function,
-    menuOfResState: any;
+    menuOfResState?: any;
 }
 class Menus extends React.Component<CategoryProps> {
     static navigationOptions = {
@@ -20,9 +24,10 @@ class Menus extends React.Component<CategoryProps> {
     };
     constructor(props) {
         super(props)
+        console.log(this.props.screenProps)
     }
     componentDidMount(): void {
-        this.props.getMenusRes(this.props.navigation.getParam('id'))
+        this.props.getMenusRes(this.props.screenProps.state.params.id)
     }
     resItem = (item) => (
         <TouchableWithoutFeedback>
@@ -55,6 +60,15 @@ class Menus extends React.Component<CategoryProps> {
                         fontSize: 16,
                         color: '#333'
                     }}>{(item.price).toLocaleString('vn')}đ</Text>
+                    <View style={[headerStyles.iconBtn, {
+                        position: 'absolute',
+                        bottom: SIZE["4"],
+                        right: 0,
+                    }]}>
+                        <TouchableOpacity>
+                            {addIcon}
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
             </View>
@@ -77,10 +91,6 @@ class Menus extends React.Component<CategoryProps> {
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{flex: 1}}>
-                    <Header
-                        bgTransparent={true}
-                        title={'Menu'}
-                        navigation={this.props.navigation}/>
                     <View style={{
                         alignItems: 'center',
                         flexDirection: 'row',
@@ -92,7 +102,7 @@ class Menus extends React.Component<CategoryProps> {
                             textAlign: 'center',
                             fontSize: SIZE["16"],
                             paddingLeft: SIZE["16"],
-                        }}>{this.props.navigation.getParam("resName")}</Text>
+                        }}>{this.props.screenProps.state.params.resName}</Text>
                     </View>
                     <View style={{padding: 12}}>
                         {this.renderListMenus()}

@@ -52,6 +52,7 @@ class AppFood extends React.Component {
         )
     }
 }
+
 export const rootStyles = StyleSheet.create({
     bgWhite: {
         backgroundColor: '#fff'

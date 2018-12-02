@@ -7,7 +7,7 @@ import {
 import Header, {headerStyles} from "../Header";
 import {apiUserInfo} from "../../stores/auth/AuthActions";
 import BannerUserInfo from '../../static/images/user.jpg'
-import {winSize} from "../Screens/Restaurant";
+import {winSize} from "../Screens/Restaurant/NearMe";
 import {PRIMARY_COLOR, SIZE} from "../../configs/Const";
 
 type AccountProps = {

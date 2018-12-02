@@ -36,7 +36,7 @@ class ListRestaurantsByNearMe extends React.Component<TProps> {
 
     resItem = (item) => (
         <TouchableWithoutFeedback onPress={() => {
-            this.props.navigation.navigate('MenusOfRes', {
+            this.props.navigation.navigate('Restaurant', {
                 resName: item.RESTAURANT.name,
                 id: item.id,
             });

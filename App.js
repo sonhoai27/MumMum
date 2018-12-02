@@ -15,7 +15,7 @@ import {createStackNavigator,createAppContainer} from "react-navigation";
 import Register from "./src/components/Auth/Register";
 import Login from "./src/components/Auth/Login";
 import Account from "./src/components/Auth/Account";
-import Menus from "./src/components/Screens/Restaurant/Menus";
+import Restaurant from "./src/components/Screens/Restaurant/Restaurant";
 
 YellowBox.ignoreWarnings([
     "Warning: isMounted(...) is deprecated",
@@ -27,7 +27,7 @@ const AppFoodStack = createStackNavigator(
         Home: {screen: Root},
         Search: {screen: Root},
         Account: {screen: Account},
-        MenusOfRes: {screen: Menus}
+        Restaurant: {screen: Restaurant}
     },
     {
         initialRouteName: 'Home',
@@ -53,6 +53,7 @@ const AppStack = createStackNavigator(
 AppStack.navigationOptions = {
     header: null,
 };
+
 
 const AppContainer = createAppContainer(AppStack);
 

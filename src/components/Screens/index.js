@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import Header, {headerStyles, navigateIcon, searchIcon} from "../Header";
 import ListCategories from "./Category";
-import ListRestaurantsByNearMe from "./Restaurant";
+import ListRestaurantsByNearMe from "./Restaurant/NearMe";
 import {SIZE} from "../../configs/Const";
 
 class Home extends React.Component {
@@ -31,21 +31,6 @@ class Home extends React.Component {
             </View>
         )
     }
-
-    renderSearchBar = ()=> {
-        return (
-            <View style={headerStyles.searchBar}>
-                {searchIcon}
-                <Text style={{
-                    marginLeft: 8,
-                    paddingHorizontal: SIZE["8"],
-                    paddingVertical: 10
-                }}>
-                    Bạn đang tìm gì?
-                </Text>
-            </View>
-        )
-    }
     render() {
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -53,7 +38,6 @@ class Home extends React.Component {
 
                     <Header title={'Trang chủ'} navigation={this.props.navigation}/>
                     {this.renderMyAdress()}
-                    {this.renderSearchBar()}
                     <ListCategories/>
                     <ListRestaurantsByNearMe navigation={this.props.navigation}/>
 
