@@ -10,18 +10,22 @@ import {PRIMARY_COLOR, SIZE} from "../configs/Const";
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconFeather from 'react-native-vector-icons/Feather';
 
-export const searchIcon = (<Icon name="ios-search" size={20} color="#ACACAC" />)
+export const searchIcon = (<Icon name="ios-search" size={20} color="#999" />)
+export const albumsIcon = (<Icon name="ios-albums" size={20} color="#000" />)
+export const listIcon = (<Icon name="ios-list" size={20} color="#000" />)
 export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR} />)
 export const basketIcon = (<IconFeather name="shopping-bag" size={SIZE["24"]} color="#000" />)
 export const accountIcon = (<Icon name="ios-person" size={SIZE["24"]} color="#000" />)
 
 type TProps = {
     title: string;
+    navigation?: any;
 }
 
 class Header extends React.Component<TProps> {
     constructor(props) {
-        super(props)
+        super(props);
+        console.log(this.props)
     }
 
     render() {
@@ -55,7 +59,9 @@ class Header extends React.Component<TProps> {
                             </View>
 
                             <View style={headerStyles.iconBtn}>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={()=> {
+                                    this.props.navigation.navigate('Account');
+                                }}>
                                     {/*<Text style={headerStyles.fontWeightBold}>{accountIcon}</Text>*/}
                                     {accountIcon}
                                 </TouchableOpacity>
@@ -64,22 +70,6 @@ class Header extends React.Component<TProps> {
                         </View>
 
                     </View>
-                </View>
-
-                <View style={headerStyles.addressTitle}>
-                    <TouchableOpacity style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}>
-                        {navigateIcon}
-                        <Text style={headerStyles.addressTitle__adress}>11 Nguyễn Đình Chiểu</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={headerStyles.searchBar}>
-                    {searchIcon}
-                    <TextInput style={{marginLeft: 8}} placeholder="What are you looking for?"/>
                 </View>
             </View>
         )
@@ -92,7 +82,7 @@ export const headerStyles = StyleSheet.create({
         color: '#000',
         fontWeight: 'bold',
         flex: 2,
-        lineHeight: 32
+        lineHeight: 36
     },
     addressTitle: {
         marginLeft: SIZE["24"],

@@ -7,7 +7,7 @@ import {
     Image,
     TouchableOpacity, StyleSheet
 } from 'react-native'
-import {apiGetCategories} from "../../../stores/lists/Actions";
+import {apiGetCategories} from "../../../stores/lists/ListActions";
 import {SIZE} from "../../../configs/Const";
 import {headerStyles} from "../../Header";
 
@@ -16,7 +16,6 @@ type TProps = {
     apiGetCategories?: Function;
 }
 class ListCategories extends React.Component<TProps> {
-
     constructor(props) {
         super(props)
     }
@@ -63,7 +62,7 @@ class ListCategories extends React.Component<TProps> {
                 marginTop: SIZE["16"],
             }}>
 
-                <Text style={[listStyles.listViewTitle, headerStyles.fontWeightBold]}>CATEGORY</Text>
+                <Text style={[listStyles.listViewTitle, headerStyles.fontWeightBold]}>Danh mục</Text>
                 {this.renderListCategories()}
 
             </View>

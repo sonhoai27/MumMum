@@ -9,7 +9,8 @@ const initialState = {
     forgetPasswordState: {},
     registerState: {},
     updateInfoState: {},
-    updatePasswordState: {}
+    updatePasswordState: {},
+    verifyState: {}
 };
 
 export default (state = initialState, action) => {
@@ -101,6 +102,21 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 registerState: action.payload.data
+            }
+        }
+
+        // verify
+        case REQUEST(ACTION_TYPES.API_RESEND_TOKEN):
+        case FAILURE(ACTION_TYPES.API_RESEND_TOKEN): {
+            return {
+                ...state
+            }
+        }
+
+        case SUCCESS(ACTION_TYPES.API_RESEND_TOKEN): {
+            return {
+                ...state,
+                verifyState: action.payload.data
             }
         }
 

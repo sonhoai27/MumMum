@@ -6,7 +6,10 @@ import {
 } from 'react-native'
 import {PRIMARY_COLOR, SIZE} from "../configs/Const";
 
-class BaseComponent extends React.Component {
+type BaseComponentProps = {
+    navigation: any;
+}
+class BaseComponent extends React.Component<BaseComponentProps> {
 
     constructor(props) {
         super(props)

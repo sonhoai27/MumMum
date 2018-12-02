@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {ACTION_TYPES} from "./Types";
+import {ACTION_TYPES} from "./ListTypes";
 import {API} from "../../configs/Const";
 
 export const apiGetCategories = (email, password) => async dispatch => {
@@ -7,7 +7,7 @@ export const apiGetCategories = (email, password) => async dispatch => {
         type: ACTION_TYPES.API_GET_CATEGORIES,
         payload: axios.get(API+'categories/getAll')
     })
-}
+};
 
 
 export const apiGetRestaurantsByNearMe = (lat, long) => async dispatch => {
@@ -21,5 +21,12 @@ export const setMyGeoLocation = (geolocation) =>  dispatch => {
     return dispatch({
         type: ACTION_TYPES.GEOLOCATION,
         payload: geolocation
+    })
+}
+
+export const getMenusRes = (resId) =>  dispatch => {
+    return dispatch({
+        type: ACTION_TYPES.API_GET_MENU_RES,
+        payload: axios.get(API+'restaurant/getMenu/'+resId)
     })
 }

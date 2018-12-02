@@ -1,10 +1,11 @@
-import {ACTION_TYPES} from "./Types";
+import {ACTION_TYPES} from "./ListTypes";
 import {FAILURE, REQUEST, SUCCESS} from "../../configs/ActionTypeUtil";
 
 const initialState = {
     categoriesState: {},
     restaurantsNearMeState: [],
-    myGeolocationState: {}
+    myGeolocationState: {},
+    menuOfResState: []
 };
 
 export default (state = initialState, action) => {
@@ -44,6 +45,18 @@ export default (state = initialState, action) => {
             }
         }
 
+        case REQUEST(ACTION_TYPES.API_GET_MENU_RES):
+        case FAILURE(ACTION_TYPES.API_GET_MENU_RES): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_GET_MENU_RES): {
+            return {
+                ...state,
+                menuOfResState: action.payload.data
+            }
+        }
         default: {
             return state
         }
