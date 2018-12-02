@@ -18,6 +18,10 @@ export const _retrieveData = async (key,cb) => {
         const value = await AsyncStorage.getItem(key);
         if (value !== null) {
             cb(JSON.parse(value))
+        }else {
+            cb({
+                message: 400
+            })
         }
     } catch (error) {
         cb({

@@ -11,3 +11,9 @@ export const apiLogin = (email, password) => async dispatch => {
         })
     })
 }
+export const setStatusLogin = (status) => dispatch => {
+    return dispatch({
+        type: ACTION_TYPES.IS_LOGIN,
+        payload: status
+    })
+}
