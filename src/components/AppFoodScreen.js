@@ -8,11 +8,11 @@ import {
 
 import {apiLogin, setStatusLogin, setUserToken} from "../stores/auth/AuthActions";
 import {_retrieveData, _storeData} from "../configs/LocalStorage";
-import Home from "./Screens";
+import Home from "./Screens/HomeScreen";
 import {setMyGeoLocation} from "../stores/lists/ListActions";
-import Login from "./Auth/Login";
+import Login from "./Auth/LoginScreen";
 
-class AppFood extends React.Component {
+class AppFoodScreen extends React.Component {
     static navigationOptions = {
         header: null
     };
@@ -72,4 +72,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AppFood);
+)(AppFoodScreen);

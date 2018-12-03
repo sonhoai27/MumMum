@@ -14,7 +14,7 @@ export const searchIcon = (<Icon name="ios-search" size={20} color="#999" />)
 export const albumsIcon = (<Icon name="ios-albums" size={20} color="#000" />)
 export const listIcon = (<Icon name="ios-list" size={20} color="#000" />)
 export const notificationsIcon = (<Icon name="ios-notifications" size={20} color="#000" />)
-export const addIcon = (<Icon name="ios-add" size={24} color="#000" />)
+export const addIcon = (<Icon name="ios-add" size={24} color="#fff" />)
 export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR} />)
 export const basketIcon = (<IconFeather name="shopping-bag" size={SIZE["24"]} color="#000" />)
 export const accountIcon = (<Icon name="ios-person" size={SIZE["24"]} color="#000" />)
@@ -114,13 +114,13 @@ export const headerStyles = StyleSheet.create({
         marginLeft: SIZE["8"]
     },
     iconBtn: {
-        backgroundColor: '#f5f5f5',
         width: 40,
         height: 40,
         borderRadius: 100,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 2
+        elevation: 2,
+        backgroundColor: '#f5f5f5',
     },
     fontWeightBold: {
         fontWeight: 'bold'

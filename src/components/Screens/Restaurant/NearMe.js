@@ -28,17 +28,21 @@ class ListRestaurantsByNearMe extends React.Component<TProps> {
     }
 
     componentDidMount(): void {
+        console.log(this.props.myGeolocationState)
         this.props.apiGetRestaurantsByNearMe(
             this.props.myGeolocationState.latitude,
             this.props.myGeolocationState.longitude
         )
     }
 
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+
+    }
+
     resItem = (item) => (
         <TouchableWithoutFeedback onPress={() => {
             this.props.navigation.navigate('Restaurant', {
-                resName: item.RESTAURANT.name,
-                id: item.id,
+                item: item,
             });
         }}>
             <View style={{

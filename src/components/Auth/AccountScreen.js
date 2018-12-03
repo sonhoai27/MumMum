@@ -15,7 +15,7 @@ type AccountProps = {
     apiUserInfo: Function;
 }
 
-class Account extends React.Component<AccountProps> {
+class AccountScreen extends React.Component<AccountProps> {
     static navigationOptions = {
         header: null
     };
@@ -153,4 +153,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Account);
+)(AccountScreen);

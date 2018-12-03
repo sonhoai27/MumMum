@@ -27,31 +27,32 @@ class Menus extends React.Component<CategoryProps> {
         console.log(this.props.screenProps)
     }
     componentDidMount(): void {
-        this.props.getMenusRes(this.props.screenProps.state.params.id)
+        this.props.getMenusRes(this.props.screenProps.state.params.item.id)
     }
     resItem = (item) => (
         <TouchableWithoutFeedback>
             <View style={{
                 margin: 12,
-                elevation: 3,
                 borderRadius: SIZE["8"],
-                backgroundColor: '#fff',
+                backgroundColor: '#fafafa',
                 overflow: 'hidden',
                 flexDirection: 'row',
+                borderBottomColor: '#eee',
+                borderBottomWidth: 1,
             }}>
                 <Image style={{
-                    width: winSize.width/3,
-                    height: winSize.width/3
+                    width: winSize.width/4,
+                    height: winSize.width/4
                 }} source={{uri: item.image}}/>
 
                 <View style={{
                     flexDirection: 'column',
-                    margin: SIZE["16"],
+                    margin: SIZE["8"],
                     flex: 1,
                 }}>
                     <Text style={{
                         textAlign: 'left',
-                        fontSize: 16,
+                        fontSize: 14,
                         color: PRIMARY_COLOR,
                         fontWeight: 'bold'
                     }}>{item.name}</Text>
@@ -60,11 +61,18 @@ class Menus extends React.Component<CategoryProps> {
                         fontSize: 16,
                         color: '#333'
                     }}>{(item.price).toLocaleString('vn')}đ</Text>
-                    <View style={[headerStyles.iconBtn, {
+                    <View style={{
                         position: 'absolute',
-                        bottom: SIZE["4"],
+                        bottom: 0,
                         right: 0,
-                    }]}>
+                        width: 24,
+                        height: 24,
+                        borderRadius: SIZE["120"],
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        elevation: 2,
+                        backgroundColor: PRIMARY_COLOR,
+                    }}>
                         <TouchableOpacity>
                             {addIcon}
                         </TouchableOpacity>
@@ -90,21 +98,10 @@ class Menus extends React.Component<CategoryProps> {
 
     render() {
         return (
-            <ScrollView showsVerticalScrollIndicator={false} style={{paddingVertical: SIZE["24"]}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{
+
+            }}>
                 <View style={{flex: 1}}>
-                    <View style={{
-                        alignItems: 'center',
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        paddingHorizontal: SIZE["24"]
-                    }}>
-                        <Text style={{
-                            lineHeight: 18,
-                            textAlign: 'center',
-                            fontSize: SIZE["16"],
-                            paddingLeft: SIZE["16"],
-                        }}>{this.props.screenProps.state.params.resName}</Text>
-                    </View>
                     <View style={{padding: 12}}>
                         {this.renderListMenus()}
                     </View>

@@ -31,7 +31,7 @@ type LoginProps = {
     apiReSendToke: Function;
     apiForgetPassword: Function;
 }
-class Login extends React.Component<LoginProps, LoginState> {
+class LoginScreen extends React.Component<LoginProps, LoginState> {
     static navigationOptions = {
         header: null
     };
@@ -356,4 +356,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Login);
+)(LoginScreen);

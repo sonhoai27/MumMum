@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 import {SIZE, PRIMARY_COLOR} from "../../configs/Const";
 import {apiRegister} from "../../stores/auth/AuthActions";
-import {rootStyles} from "../AppFood";
+import {rootStyles} from "../AppFoodScreen";
 
 const winSize = Dimensions.get('window');
 
@@ -22,7 +22,7 @@ type RegisterState = {
     password: string;
 }
 
-class Register extends React.Component<{}, RegisterState> {
+class RegisterScreen extends React.Component<{}, RegisterState> {
     static navigationOptions = {
         header: null
     };
@@ -165,4 +165,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Register);
+)(RegisterScreen);

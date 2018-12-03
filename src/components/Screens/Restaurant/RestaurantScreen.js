@@ -10,6 +10,7 @@ import Comments from "./Comments";
 import {createMaterialTopTabNavigator,createAppContainer} from "react-navigation";
 import {winSize} from "./NearMe";
 import {PRIMARY_COLOR} from "../../../configs/Const";
+import Intro from "./Intro";
 
 type RestaurantProps = {
     navigation: any;
@@ -18,26 +19,42 @@ type RestaurantState= {
 }
 
 const TabNavigator = createMaterialTopTabNavigator({
+    Home: {
+        screen: Intro,
+        navigationOptions: () => ({
+            title: `Giới thiệu`
+        }),
+    },
     Menu: Menus,
-    Comment: Comments,
+    Comment: {
+        screen: Comments,
+        navigationOptions: () => ({
+            title: `Bình luận`
+        }),
+    },
 },{
+    tabBarPosition: 'top',
     tabBarOptions: {
-        inactiveTintColor: {
-            backgroundColor: 'rgb(255,255,255)',
-        },
+        activeTintColor: PRIMARY_COLOR,
+        inactiveTintColor: '#333',
         labelStyle: {
-            fontSize: 8,
-            color: '#333'
+            fontSize: 14,
+            fontWeight: 'bold'
         },
         tabStyle: {
-            width: winSize.width/2,
-            backgroundColor: PRIMARY_COLOR,
+            width: winSize.width/3
+        },
+        style: {
+            backgroundColor: '#fff'
+        },
+        indicatorStyle: {
+            backgroundColor: PRIMARY_COLOR
         }
     }
 });
 
 const AppContainer = createAppContainer(TabNavigator);
-class Restaurant extends React.Component<RestaurantProps, RestaurantState> {
+class RestaurantScreen extends React.Component<RestaurantProps, RestaurantState> {
     static navigationOptions = {
         header: null
     };
@@ -67,4 +84,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Restaurant);
+)(RestaurantScreen);

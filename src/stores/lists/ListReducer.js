@@ -41,7 +41,7 @@ export default (state = initialState, action) => {
             }
         }
 
-        case SUCCESS(ACTION_TYPES.GEOLOCATION): {
+        case (ACTION_TYPES.GEOLOCATION): {
             return {
                 ...state,
                 myGeolocationState: action.payload

@@ -73,7 +73,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "Account.js"
+    entryFile: "AccountScreenScreen.js"
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-youtube')
     compile project(':react-native-gesture-handler')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-vector-icons')
