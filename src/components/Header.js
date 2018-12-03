@@ -49,7 +49,7 @@ class Header extends React.Component<TProps> {
                 backgroundColor: '#fff',
                 paddingHorizontal: 24,
                 paddingBottom: 16,
-                height: 128,
+                height: 128
             }}>
                 {this.renderSearchBar()}
                 <View style={{

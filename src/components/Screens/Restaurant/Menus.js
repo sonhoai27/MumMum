@@ -87,9 +87,10 @@ class Menus extends React.Component<CategoryProps> {
             )
         }
     };
+
     render() {
         return (
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{paddingVertical: SIZE["24"]}}>
                 <View style={{flex: 1}}>
                     <View style={{
                         alignItems: 'center',
@@ -118,7 +119,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     getMenusRes
-}
+};
 
 export default connect(
     mapStateToProps,

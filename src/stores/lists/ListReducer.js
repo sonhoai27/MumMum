@@ -5,7 +5,10 @@ const initialState = {
     categoriesState: {},
     restaurantsNearMeState: [],
     myGeolocationState: {},
-    menuOfResState: []
+    menuOfResState: [],
+    menuOfResCategoriesState: [],
+    menuOfResPagesState: [],
+    searchResByNameState: []
 };
 
 export default (state = initialState, action) => {
@@ -38,7 +41,7 @@ export default (state = initialState, action) => {
             }
         }
 
-        case (ACTION_TYPES.GEOLOCATION): {
+        case SUCCESS(ACTION_TYPES.GEOLOCATION): {
             return {
                 ...state,
                 myGeolocationState: action.payload
@@ -55,6 +58,45 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 menuOfResState: action.payload.data
+            }
+        }
+
+        case REQUEST(ACTION_TYPES.API_GET_RESTAURANT_BY_CATEGORY):
+        case FAILURE(ACTION_TYPES.API_GET_RESTAURANT_BY_CATEGORY): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_GET_RESTAURANT_BY_CATEGORY): {
+            return {
+                ...state,
+                menuOfResCategoriesState: action.payload.data
+            }
+        }
+
+        case REQUEST(ACTION_TYPES.API_GET_RESTAURANT_BY_PAGE):
+        case FAILURE(ACTION_TYPES.API_GET_RESTAURANT_BY_PAGE): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_GET_RESTAURANT_BY_PAGE): {
+            return {
+                ...state,
+                menuOfResPagesState: action.payload.data
+            }
+        }
+
+        case REQUEST(ACTION_TYPES.API_SEARCH_RESTAURANT_BY_NAME):
+        case FAILURE(ACTION_TYPES.API_SEARCH_RESTAURANT_BY_NAME): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_SEARCH_RESTAURANT_BY_NAME): {
+            return {
+                ...state,
+                searchResByNameState: action.payload.data
             }
         }
         default: {

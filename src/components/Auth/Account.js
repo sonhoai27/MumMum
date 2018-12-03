@@ -6,7 +6,6 @@ import {
 } from 'react-native'
 import Header, {headerStyles} from "../Header";
 import {apiUserInfo} from "../../stores/auth/AuthActions";
-import BannerUserInfo from '../../static/images/user.jpg'
 import {winSize} from "../Screens/Restaurant/NearMe";
 import {PRIMARY_COLOR, SIZE} from "../../configs/Const";
 
@@ -45,7 +44,7 @@ class Account extends React.Component<AccountProps> {
                                 width: winSize.width - 32,
                                 margin: 16
                             }}
-                            source={BannerUserInfo}/>
+                            source={{uri: 'https://static.dezeen.com/uploads/2018/07/food-design-luca-verweij-dezeen-2364-sq-411x411.jpg'}}/>
                         <View style={{
                             paddingHorizontal: SIZE["16"],
                             paddingVertical: SIZE["8"],

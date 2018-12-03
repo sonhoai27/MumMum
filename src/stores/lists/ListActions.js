@@ -30,3 +30,24 @@ export const getMenusRes = (resId) =>  dispatch => {
         payload: axios.get(API+'restaurant/getMenu/'+resId)
     })
 }
+
+export const getResByCategories = (catId) =>  dispatch => {
+    return dispatch({
+        type: ACTION_TYPES.API_GET_RESTAURANT_BY_CATEGORY,
+        payload: axios.get(API+'/restaurant/getCategory/'+catId)
+    })
+}
+
+export const getResByPage = (pageId) =>  dispatch => {
+    return dispatch({
+        type: ACTION_TYPES.API_GET_RESTAURANT_BY_PAGE,
+        payload: axios.get(API+'/restaurant/getAll/'+pageId)
+    })
+}
+
+export const searchResByName = () =>  dispatch => {
+    return dispatch({
+        type: ACTION_TYPES.API_SEARCH_RESTAURANT_BY_NAME,
+        payload: axios.get(API+'/restaurant/search')
+    })
+}

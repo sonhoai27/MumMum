@@ -7,8 +7,9 @@ import {
 import Header from "../../Header";
 import Menus from "./Menus";
 import Comments from "./Comments";
-import {createBottomTabNavigator,createAppContainer} from "react-navigation";
+import {createMaterialTopTabNavigator,createAppContainer} from "react-navigation";
 import {winSize} from "./NearMe";
+import {PRIMARY_COLOR} from "../../../configs/Const";
 
 type RestaurantProps = {
     navigation: any;
@@ -16,10 +17,25 @@ type RestaurantProps = {
 type RestaurantState= {
 }
 
-const TabNavigator = createBottomTabNavigator({
+const TabNavigator = createMaterialTopTabNavigator({
     Menu: Menus,
     Comment: Comments,
+},{
+    tabBarOptions: {
+        inactiveTintColor: {
+            backgroundColor: 'rgb(255,255,255)',
+        },
+        labelStyle: {
+            fontSize: 8,
+            color: '#333'
+        },
+        tabStyle: {
+            width: winSize.width/2,
+            backgroundColor: PRIMARY_COLOR,
+        }
+    }
 });
+
 const AppContainer = createAppContainer(TabNavigator);
 class Restaurant extends React.Component<RestaurantProps, RestaurantState> {
     static navigationOptions = {
