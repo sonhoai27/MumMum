@@ -2,37 +2,52 @@ import {ACTION_TYPES} from "./OrderTypes";
 import {FAILURE, REQUEST, SUCCESS} from "../../configs/ActionTypeUtil";
 
 const initialState = {
-    foodsByNameOfCategoryState: [],
-    foodsByNameState: []
+    ordersState: [],
+    historyOrdersOfUserState: [],
+    detailOrderByIdState: []
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case REQUEST(ACTION_TYPES.API_SEARCH_FOOD_BY_NAME_OF_CATEGORY):
-        case FAILURE(ACTION_TYPES.API_SEARCH_FOOD_BY_NAME_OF_CATEGORY): {
+        case REQUEST(ACTION_TYPES.API_CREATE_ORDER):
+        case FAILURE(ACTION_TYPES.API_CREATE_ORDER): {
             return {
                 ...state
             }
         }
-        case SUCCESS(ACTION_TYPES.API_SEARCH_FOOD_BY_NAME_OF_CATEGORY): {
+        case SUCCESS(ACTION_TYPES.API_CREATE_ORDER): {
             return {
                 ...state,
-                foodsByNameOfCategoryState: action.payload.data
+                ordersState: action.payload.data
             }
         }
 
-        case REQUEST(ACTION_TYPES.API_SEARCH_FOOD_BY_NAME):
-        case FAILURE(ACTION_TYPES.API_SEARCH_FOOD_BY_NAME): {
+        case REQUEST(ACTION_TYPES.API_GET_ALL_HISTORY_ORDER_OF_USER):
+        case FAILURE(ACTION_TYPES.API_GET_ALL_HISTORY_ORDER_OF_USER): {
             return {
                 ...state
             }
         }
-        case SUCCESS(ACTION_TYPES.API_SEARCH_FOOD_BY_NAME): {
+        case SUCCESS(ACTION_TYPES.API_GET_ALL_HISTORY_ORDER_OF_USER): {
             return {
                 ...state,
-                foodsByNameState: action.payload.data
+                historyOrdersOfUserState: action.payload.data
             }
         }
+
+        case REQUEST(ACTION_TYPES.API_GET_DETAIL_ORDER_BY_ID):
+        case FAILURE(ACTION_TYPES.API_GET_DETAIL_ORDER_BY_ID): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_GET_DETAIL_ORDER_BY_ID): {
+            return {
+                ...state,
+                detailOrderByIdState: action.payload.data
+            }
+        }
+
         default: {
             return state
         }

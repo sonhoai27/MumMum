@@ -2,8 +2,8 @@ import {ACTION_TYPES} from "./AddressTypes";
 import {FAILURE, REQUEST, SUCCESS} from "../../configs/ActionTypeUtil";
 
 const initialState = {
-    district: [],
-    wardByDistrict: []
+    districts: [],
+    wardsByDistrict: []
 };
 
 export default (state = initialState, action) => {
@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_GET_ALL_DISTRICT): {
             return {
                 ...state,
-                district: action.payload.data
+                districts: action.payload.data
             }
         }
 
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_GET_WARD_BY_DISTRICT): {
             return {
                 ...state,
-                wardByDistrict: action.payload.data
+                wardsByDistrict: action.payload.data
             }
         }
         default: {
