@@ -38,16 +38,16 @@ export const getResByCategories = (catId) =>  dispatch => {
     })
 }
 
-export const getResByPage = (pageId) =>  dispatch => {
+export const getResByPage = (per_pageId,pageId) =>  dispatch => {
     return dispatch({
         type: ACTION_TYPES.API_GET_RESTAURANT_BY_PAGE,
-        payload: axios.get(API+'/restaurant/getAll/'+pageId)
+        payload: axios.get(API+'/restaurant/getAll/',{params: {per_page: per_pageId, page: pageId }})
     })
 }
 
-export const searchResByName = () =>  dispatch => {
+export const searchResByName = (nameId) =>  dispatch => {
     return dispatch({
         type: ACTION_TYPES.API_SEARCH_RESTAURANT_BY_NAME,
-        payload: axios.get(API+'/restaurant/search')
+        payload: axios.get(API+'/restaurant/search/'+nameId)
     })
 }
