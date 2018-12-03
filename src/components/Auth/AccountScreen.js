@@ -33,6 +33,7 @@ class AccountScreen extends React.Component<AccountProps> {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{flex: 1}}>
                     <Header
+                        isShowingGoBack={true}
                         bgTransparent={true}
                         title={'Tài khoản'}
                         navigation={this.props.navigation}/>

@@ -38,7 +38,7 @@ const TabNavigator = createMaterialTopTabNavigator({
         activeTintColor: PRIMARY_COLOR,
         inactiveTintColor: '#333',
         labelStyle: {
-            fontSize: 14,
+            fontSize: 12,
             fontWeight: 'bold'
         },
         tabStyle: {
@@ -65,6 +65,7 @@ class RestaurantScreen extends React.Component<RestaurantProps, RestaurantState>
         return (
             <View style={{flex: 1}}>
                 <Header
+                    isShowingGoBack={true}
                     bgTransparent={true}
                     title={'Nhà hàng'}
                     navigation={this.props.navigation}/>

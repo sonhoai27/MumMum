@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {YellowBox} from 'react-native'
+import {YellowBox,Animated} from 'react-native'
 import {Provider} from 'react-redux';
 import initStore from './src/stores/Store'
 import Root from "./src/components/AppFoodScreen";
@@ -16,6 +16,7 @@ import Register from "./src/components/Auth/RegisterScreen";
 import Login from "./src/components/Auth/LoginScreen";
 import Account from "./src/components/Auth/AccountScreen";
 import Restaurant from "./src/components/Screens/Restaurant/RestaurantScreen";
+import * as Easing from "react-native";
 
 YellowBox.ignoreWarnings([
     "Warning: isMounted(...) is deprecated",

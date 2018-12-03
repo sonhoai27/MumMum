@@ -11,6 +11,7 @@ import {_retrieveData, _storeData} from "../configs/LocalStorage";
 import Home from "./Screens/HomeScreen";
 import {setMyGeoLocation} from "../stores/lists/ListActions";
 import Login from "./Auth/LoginScreen";
+import {PRIMARY_COLOR} from "../configs/Const";
 
 class AppFoodScreen extends React.Component {
     static navigationOptions = {
@@ -41,7 +42,7 @@ class AppFoodScreen extends React.Component {
             <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
                 <StatusBar
                     barStyle="dark-content"
-                    backgroundColor="#fff"
+                    backgroundColor={PRIMARY_COLOR}
                 />
                 <View style={{ flex: 1, }}>
                     {

@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {
     View,
-    Text, StyleSheet, TouchableOpacity, TextInput
+    Text, StyleSheet, TouchableOpacity, TextInput, sequence
 } from 'react-native'
 
 import {PRIMARY_COLOR, SIZE} from "../configs/Const";
@@ -10,18 +10,20 @@ import {PRIMARY_COLOR, SIZE} from "../configs/Const";
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconFeather from 'react-native-vector-icons/Feather';
 
-export const searchIcon = (<Icon name="ios-search" size={20} color="#999" />)
-export const albumsIcon = (<Icon name="ios-albums" size={20} color="#000" />)
-export const listIcon = (<Icon name="ios-list" size={20} color="#000" />)
-export const notificationsIcon = (<Icon name="ios-notifications" size={20} color="#000" />)
-export const addIcon = (<Icon name="ios-add" size={24} color="#fff" />)
-export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR} />)
-export const basketIcon = (<IconFeather name="shopping-bag" size={SIZE["24"]} color="#000" />)
-export const accountIcon = (<Icon name="ios-person" size={SIZE["24"]} color="#000" />)
+export const searchIcon = (<Icon name="ios-search" size={20} color="#999"/>)
+export const albumsIcon = (<Icon name="ios-albums" size={20} color="#000"/>)
+export const listIcon = (<Icon name="ios-list" size={20} color="#000"/>)
+export const arrowBackIcon = (<Icon name="ios-arrow-back" size={28} color="#fff"/>);
+export const notificationsIcon = (<Icon name="ios-notifications" size={20} color="#000"/>)
+export const addIcon = (<Icon name="ios-add" size={24} color="#fff"/>)
+export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR}/>)
+export const basketIcon = (<IconFeather name="shopping-bag" size={SIZE["24"]} color="#000"/>)
+export const accountIcon = (<Icon name="ios-person" size={SIZE["24"]} color="#000"/>)
 
 type TProps = {
     title: string;
     navigation?: any;
+    isShowingGoBack?: false | true;
 }
 
 class Header extends React.Component<TProps> {
@@ -29,33 +31,61 @@ class Header extends React.Component<TProps> {
         super(props);
         console.log(this.props)
     }
-    renderSearchBar = ()=> {
+
+    renderSearchBar = () => {
         return (
             <View style={headerStyles.searchBar}>
                 {searchIcon}
-                <Text style={{
+                <TextInput style={{
+                    width: '100%',
+                    height: 40,
                     marginLeft: 8,
+                    marginRight: 8,
                     paddingHorizontal: SIZE["8"],
-                    paddingVertical: 10
-                }}>
-                    Bạn đang tìm gì?
-                </Text>
+                    paddingVertical: 10,
+                }} placeholder={'Bạn đang tìm gì?'}/>
             </View>
         )
     }
+
     render() {
         return (
             <View style={{
                 backgroundColor: '#fff',
-                paddingHorizontal: 24,
-                paddingBottom: 16,
-                height: 128
+                height: 120,
             }}>
-                {this.renderSearchBar()}
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    backgroundColor: PRIMARY_COLOR,
+                    paddingHorizontal: 24,
+                    paddingBottom: 8,
+                }}>
+                    {this.props.isShowingGoBack ?
+                        <TouchableOpacity onPress={() => {
+                            this.props.navigation.goBack()
+                        }}>
+                            <View style={headerStyles.btnGoBack}>
+                                {arrowBackIcon}
+                            </View>
+                        </TouchableOpacity>
+                        : <View/>}
+                    {this.renderSearchBar()}
+                    <View style={[headerStyles.iconBtn, {marginLeft: SIZE["16"]}]}>
+                        <TouchableOpacity onPress={() => {
+                            this.props.navigation.navigate('Account');
+                        }}>
+                            {/*<Text style={headerStyles.fontWeightBold}>{accountIcon}</Text>*/}
+                            {accountIcon}
+                        </TouchableOpacity>
+                    </View>
+                </View>
                 <View style={{
                     flex: 1,
                     alignItems: 'center',
-                    flexDirection: 'row'
+                    flexDirection: 'row',
+                    paddingHorizontal: 24,
                 }}>
 
                     <Text style={headerStyles.headerTitle}>{this.props.title}</Text>
@@ -73,18 +103,9 @@ class Header extends React.Component<TProps> {
                             </TouchableOpacity>
                         </View>
 
-                        <View style={[headerStyles.iconBtn, {marginRight: 8}]}>
+                        <View style={[headerStyles.iconBtn]}>
                             <TouchableOpacity>
                                 {notificationsIcon}
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={headerStyles.iconBtn}>
-                            <TouchableOpacity onPress={()=> {
-                                this.props.navigation.navigate('Account');
-                            }}>
-                                {/*<Text style={headerStyles.fontWeightBold}>{accountIcon}</Text>*/}
-                                {accountIcon}
                             </TouchableOpacity>
                         </View>
 
@@ -114,8 +135,8 @@ export const headerStyles = StyleSheet.create({
         marginLeft: SIZE["8"]
     },
     iconBtn: {
-        width: 40,
-        height: 40,
+        width: 32,
+        height: 32,
         borderRadius: 100,
         justifyContent: 'center',
         alignItems: 'center',
@@ -126,23 +147,25 @@ export const headerStyles = StyleSheet.create({
         fontWeight: 'bold'
     },
     searchBar: {
-        marginBottom: SIZE["16"],
-        marginTop: SIZE["16"],
+        marginBottom: SIZE["8"],
+        marginTop: SIZE["8"],
         backgroundColor: '#f5f5f5',
         paddingRight: SIZE["16"],
         paddingLeft: SIZE["16"],
         borderRadius: SIZE["16"],
         flexDirection: 'row',
-        alignItems:'center',
+        alignItems: 'center',
         flex: 1,
+    },
+    btnGoBack: {
+        padding: SIZE["4"],
+        marginRight: SIZE["16"]
     }
 });
 
-const mapStateToProps = state => ({
-});
+const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {
-};
+const mapDispatchToProps = {};
 
 
 export default connect(

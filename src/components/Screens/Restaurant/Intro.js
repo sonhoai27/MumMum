@@ -30,7 +30,7 @@ class Intro extends React.Component<BaseComponentProps> {
                     <Image
                         style={{
                             width: winSize.width,
-                            height: winSize.width / 2,
+                            height: winSize.width*0.7,
                         }}
                         source={{uri: this.props.screenProps.state.params.item.RESTAURANT.image}}
                     />
