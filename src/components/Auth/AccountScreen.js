@@ -17,26 +17,30 @@ type AccountProps = {
 
 class AccountScreen extends React.Component<AccountProps> {
     static navigationOptions = {
-        header: null
+        title: 'Tài khoản',
+        headerStyle: {
+            backgroundColor: PRIMARY_COLOR,
+            elevation: 0,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            textAlign: 'center',
+            flex: 1
+        },
     };
+    constructor(props) {
+        super(props)
+    }
 
     componentDidMount(): void {
         this.props.apiUserInfo(this.props.userState.token)
-    }
-
-    constructor(props) {
-        super(props)
     }
 
     render() {
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{flex: 1}}>
-                    <Header
-                        isShowingGoBack={true}
-                        bgTransparent={true}
-                        title={'Tài khoản'}
-                        navigation={this.props.navigation}/>
                     <View style={{position: 'relative', paddingBottom: SIZE["64"]}}>
                         <Image
                             style={{
@@ -149,7 +153,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     apiUserInfo
-}
+};
 
 export default connect(
     mapStateToProps,

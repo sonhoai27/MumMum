@@ -4,7 +4,7 @@ import {FAILURE, REQUEST, SUCCESS} from "../../configs/ActionTypeUtil";
 const initialState = {
     ordersState: [],
     historyOrdersOfUserState: [],
-    detailOrderByIdState: []
+    detailOrderByIdState: [],
 };
 
 export default (state = initialState, action) => {

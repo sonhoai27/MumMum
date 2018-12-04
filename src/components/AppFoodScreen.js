@@ -15,9 +15,18 @@ import {PRIMARY_COLOR} from "../configs/Const";
 
 class AppFoodScreen extends React.Component {
     static navigationOptions = {
-        header: null
+        title: 'Trang chủ',
+        headerStyle: {
+            backgroundColor: PRIMARY_COLOR,
+            elevation: 0,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            textAlign: 'center',
+            flex: 1
+        }
     };
-
     constructor(props) {
         super(props)
     }
@@ -36,7 +45,6 @@ class AppFoodScreen extends React.Component {
             }
         })
     }
-
     render() {
         return (
             <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
@@ -46,7 +54,7 @@ class AppFoodScreen extends React.Component {
                 />
                 <View style={{ flex: 1, }}>
                     {
-                        this.props.isLoginState ? <Home navigation={this.props.navigation}/> : <Login navigation={this.props.navigation}/> // do cho nay ko phai route den login nen phai truyen props
+                        <Home navigation={this.props.navigation}/>
                     }
                 </View>
             </SafeAreaView>
@@ -60,8 +68,6 @@ export const rootStyles = StyleSheet.create({
     }
 })
 const mapStateToProps = state => ({
-    loginState: state.auth.loginState,
-    isLoginState: state.auth.isLoginState,
 });
 
 const mapDispatchToProps = {

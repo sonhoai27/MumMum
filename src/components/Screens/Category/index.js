@@ -58,9 +58,7 @@ class ListCategories extends React.Component<TProps> {
     }
     render() {
         return (
-            <View style={{
-                marginTop: SIZE["16"],
-            }}>
+            <View>
 
                 <Text style={[listStyles.listViewTitle, headerStyles.fontWeightBold]}>Danh mục</Text>
                 {this.renderListCategories()}

@@ -9,7 +9,20 @@ import ListCategories from "./Category";
 import ListRestaurantsByNearMe from "./Restaurant/NearMe";
 import {PRIMARY_COLOR} from "../../configs/Const";
 
-class Home extends React.Component {
+class SearchSreen extends React.Component {
+    static navigationOptions = {
+        title: 'Tìm kiếm',
+        headerStyle: {
+            backgroundColor: PRIMARY_COLOR,
+            elevation: 0,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            textAlign: 'center',
+            flex: 1
+        },
+    };
     constructor(props) {
         super(props);
     }
@@ -51,4 +64,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Home);
+)(SearchSreen);

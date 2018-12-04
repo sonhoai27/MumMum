@@ -9,15 +9,16 @@ import {PRIMARY_COLOR, SIZE} from "../configs/Const";
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconFeather from 'react-native-vector-icons/Feather';
+import {setStatusOrderModal} from "../stores/order/OrderActions";
 
 export const searchIcon = (<Icon name="ios-search" size={20} color="#999"/>)
 export const albumsIcon = (<Icon name="ios-albums" size={20} color="#000"/>)
 export const listIcon = (<Icon name="ios-list" size={20} color="#000"/>)
 export const arrowBackIcon = (<Icon name="ios-arrow-back" size={28} color="#fff"/>);
-export const notificationsIcon = (<Icon name="ios-notifications" size={20} color="#000"/>)
+export const notificationsIcon = (<Icon name="ios-notifications" size={20} color="#000"/>);
 export const addIcon = (<Icon name="ios-add" size={24} color="#fff"/>)
-export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR}/>)
-export const basketIcon = (<IconFeather name="shopping-bag" size={SIZE["24"]} color="#000"/>)
+export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR}/>);
+export const basketIcon = (<IconFeather name="shopping-bag" size={SIZE["24"]} color="#000"/>);
 export const accountIcon = (<Icon name="ios-person" size={SIZE["24"]} color="#000"/>)
 
 type TProps = {
@@ -71,7 +72,9 @@ class Header extends React.Component<TProps> {
                             </View>
                         </TouchableOpacity>
                         : <View/>}
-                    {this.renderSearchBar()}
+                    {
+                        this.renderSearchBar()
+                    }
                     <View style={[headerStyles.iconBtn, {marginLeft: SIZE["16"]}]}>
                         <TouchableOpacity onPress={() => {
                             this.props.navigation.navigate('Account');
@@ -89,27 +92,6 @@ class Header extends React.Component<TProps> {
                 }}>
 
                     <Text style={headerStyles.headerTitle}>{this.props.title}</Text>
-
-                    <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-end',
-
-                    }}>
-
-                        <View style={[headerStyles.iconBtn, {marginRight: 8}]}>
-                            <TouchableOpacity>
-                                {basketIcon}
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={[headerStyles.iconBtn]}>
-                            <TouchableOpacity>
-                                {notificationsIcon}
-                            </TouchableOpacity>
-                        </View>
-
-                    </View>
                 </View>
             </View>
         )
@@ -127,7 +109,8 @@ export const headerStyles = StyleSheet.create({
     addressTitle: {
         marginLeft: SIZE["24"],
         marginRight: SIZE["24"],
-        marginBottom: SIZE["16"]
+        marginBottom: SIZE["8"],
+        marginTop: SIZE["16"]
     },
     addressTitle__adress: {
         fontSize: 14,
@@ -163,10 +146,11 @@ export const headerStyles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+});
 
-const mapDispatchToProps = {};
-
+const mapDispatchToProps = {
+};
 
 export default connect(
     mapStateToProps,
