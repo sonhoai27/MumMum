@@ -2,10 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {
     View,
-    Text, StyleSheet,TouchableOpacity
+    Text, StyleSheet
 } from 'react-native'
 import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
-import {setStatusLogin} from "../../../stores/auth/AuthActions";
 
 type OrderScreenProps = {
     navigation: any;
@@ -31,9 +30,6 @@ class OrderScreen extends React.Component<OrderScreenProps,OrderScreenStates> {
 
     constructor(props) {
         super(props)
-        if (!this.props.isLoginState){
-            this.props.navigation.navigate("Login")
-        }
     }
     componentDidMount(): void {
         console.log(this.props.isLoginState)
@@ -69,7 +65,7 @@ export const orderStyles = StyleSheet.create({
     }
 })
 const mapStateToProps = state => ({
-    isLoginState: state.auth.isLoginState,
+    isLoginState: state.auth.isLoginState
 });
 
 const mapDispatchToProps = {

@@ -28,15 +28,13 @@ class ListRestaurantsByNearMe extends React.Component<TProps> {
     }
 
     componentDidMount(): void {
+        this.props.apiGetRestaurantsByNearMe(
+            this.props.myGeolocationState.latitude,
+            this.props.myGeolocationState.longitude
+        )
     }
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
-        if (this.props.myGeolocationState !== prevProps.myGeolocationState){
-            this.props.apiGetRestaurantsByNearMe(
-                this.props.myGeolocationState.latitude,
-                this.props.myGeolocationState.longitude
-            )
-        }
     }
     resItem = (item) => (
         <TouchableWithoutFeedback onPress={() => {
@@ -50,7 +48,7 @@ class ListRestaurantsByNearMe extends React.Component<TProps> {
                 position: "relative"
             }}>
                 <Image style={{
-                    width: winSize.width - 48,
+                    width: winSize.width - 32,
                     height: winSize.width * 0.7,
                     borderRadius: SIZE["8"],
                 }} source={{uri: item.RESTAURANT.image}}/>
@@ -108,8 +106,8 @@ class ListRestaurantsByNearMe extends React.Component<TProps> {
                     </Text>
                 </View>
                 <View style={{
-                    marginRight: SIZE["24"],
-                    marginLeft: SIZE["24"]
+                    marginRight: SIZE["16"],
+                    marginLeft: SIZE["16"]
                 }}>
                     {this.renderListRes()}
                 </View>
@@ -122,8 +120,8 @@ export const restaurantStyles = StyleSheet.create({
     listViewTitle: {
         fontSize: SIZE["16"],
         color: '#000',
-        marginLeft: SIZE["24"],
-        marginRight: SIZE["24"],
+        marginLeft: SIZE["16"],
+        marginRight: SIZE["16"],
         marginBottom: SIZE["8"],
         borderBottomColor: '#eee'
     },
@@ -140,7 +138,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     apiGetRestaurantsByNearMe
-}
+};
 
 export default connect(
     mapStateToProps,

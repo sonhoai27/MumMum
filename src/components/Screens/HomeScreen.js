@@ -10,6 +10,9 @@ import ListRestaurantsByNearMe from "./Restaurant/NearMe";
 import {PRIMARY_COLOR} from "../../configs/Const";
 
 class Home extends React.Component {
+    static navigationOptions = {
+        header: null,
+    };
     constructor(props) {
         super(props);
     }

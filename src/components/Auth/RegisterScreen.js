@@ -120,7 +120,7 @@ class RegisterScreen extends React.Component<{}, RegisterState> {
                             flexDirection: 'column',
                             marginTop: SIZE["32"]
                         }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Root')}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
                                 <Text style={{color: '#333'}}>Đăng nhập.</Text>
                             </TouchableOpacity>
                             <TouchableOpacity>

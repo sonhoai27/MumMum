@@ -72,7 +72,7 @@ const listStyles = StyleSheet.create({
     listViewTitle: {
         fontSize: SIZE["16"],
         color: '#000',
-        marginLeft: SIZE["24"],
+        marginLeft: SIZE["16"],
         marginBottom: SIZE["8"]
     }
 });
