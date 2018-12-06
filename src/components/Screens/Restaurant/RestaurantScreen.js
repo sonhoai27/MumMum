@@ -4,7 +4,6 @@ import {
     View,
     Text, ScrollView, Dimensions
 } from 'react-native'
-import Header from "../../Header";
 import Menus from "./Menus";
 import Comments from "./Comments";
 import {createMaterialTopTabNavigator, createAppContainer} from "react-navigation";
@@ -46,7 +45,7 @@ const TabNavigator = createMaterialTopTabNavigator({
     }
 });
 
-const AppContainer = createAppContainer(TabNavigator);
+export const AppContainer = createAppContainer(TabNavigator);
 
 class RestaurantScreen extends React.Component<RestaurantProps, RestaurantState> {
     static navigationOptions = ({ navigation }) => {

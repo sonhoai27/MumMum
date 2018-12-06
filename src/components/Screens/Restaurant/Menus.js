@@ -12,11 +12,14 @@ import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
 import { addIcon, headerStyles } from "../../Header";
 import {getMenusRes} from "../../../stores/lists/ListActions";
 import {winSize} from "./NearMe";
+import {addToCart} from "../../../stores/order/OrderActions";
 
 type CategoryProps = {
     navigation: any;
     getMenusRes?: Function,
     menuOfResState?: any;
+    shoppingCartState?: any;
+    addToCart: Function;
 }
 class Menus extends React.Component<CategoryProps> {
     static navigationOptions = {
@@ -29,6 +32,11 @@ class Menus extends React.Component<CategoryProps> {
     componentDidMount(): void {
         this.props.getMenusRes(this.props.screenProps.state.params.item.id)
     }
+
+    addToCart = (food) => {
+        this.props.addToCart(this.props.shoppingCartState,food);
+    };
+
     resItem = (item) => (
         <TouchableWithoutFeedback>
             <View style={{
@@ -65,15 +73,15 @@ class Menus extends React.Component<CategoryProps> {
                         position: 'absolute',
                         bottom: 0,
                         right: 0,
-                        width: 24,
-                        height: 24,
+                        width: 28,
+                        height: 28,
                         borderRadius: SIZE["120"],
                         justifyContent: 'center',
                         alignItems: 'center',
                         elevation: 2,
                         backgroundColor: PRIMARY_COLOR,
                     }}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=> this.addToCart(item)}>
                             {addIcon}
                         </TouchableOpacity>
                     </View>
@@ -111,11 +119,13 @@ class Menus extends React.Component<CategoryProps> {
     }
 }
 const mapStateToProps = state => ({
-    menuOfResState: state.lists.menuOfResState
+    menuOfResState: state.lists.menuOfResState,
+    shoppingCartState: state.order.shoppingCartState
 });
 
 const mapDispatchToProps = {
-    getMenusRes
+    getMenusRes,
+    addToCart
 };
 
 export default connect(

@@ -1,76 +1,88 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {
-    View,
-    Text, StyleSheet
+    View
 } from 'react-native'
-import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
-
+import {createMaterialTopTabNavigator, createAppContainer} from "react-navigation";
+import {PRIMARY_COLOR} from "../../../configs/Const";
+import {winSize} from "../Restaurant/NearMe";
+import HistoryOrders from "./HistoryOrders";
+import ShoppingCart from "./ShoppingCart";
+import Icons from "react-native-vector-icons/Ionicons";
 type OrderScreenProps = {
     navigation: any;
-    isLoginState?: boolean;
 }
-type OrderScreenStates = {
-}
-class OrderScreen extends React.Component<OrderScreenProps,OrderScreenStates> {
-    static navigationOptions = {
-        title: 'Giỏ hàng',
-        headerStyle: {
-            backgroundColor: PRIMARY_COLOR,
-            elevation: 0,
+type OrderScreenState = {}
+
+const TabNavigator = createMaterialTopTabNavigator({
+
+    ShoppingCart: {
+        screen: ShoppingCart,
+        navigationOptions: ({ navigation }) => ({
+            title: "Giỏ hàng",
+        })
+    },
+    HistoryOrders: {
+        screen: HistoryOrders,
+        navigationOptions: ({ navigation }) => ({
+            title: "Lịch sử mua hàng",
+        })
+    },
+}, {
+    tabBarPosition: 'top',
+    tabBarOptions: {
+        activeTintColor: PRIMARY_COLOR,
+        inactiveTintColor: '#333',
+        labelStyle: {
+            fontSize: 12,
+            fontWeight: 'bold'
         },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-            textAlign: 'center',
-            flex: 1
+        tabStyle: {
+            width: winSize.width / 2
         },
+        style: {
+            backgroundColor: '#fff'
+        },
+        indicatorStyle: {
+            backgroundColor: PRIMARY_COLOR
+        }
+    }
+});
+
+export const AppContainer = createAppContainer(TabNavigator);
+
+class OrderScreen extends React.Component<OrderScreenProps, OrderScreenState> {
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Giỏ hàng',
+            headerStyle: {
+                backgroundColor: PRIMARY_COLOR,
+                elevation: 0,
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+                textAlign: 'center',
+                flex: 1
+            },
+        };
     };
-
-
     constructor(props) {
         super(props)
-    }
-    componentDidMount(): void {
-        console.log(this.props.isLoginState)
     }
 
     render() {
         return (
             <View style={{flex: 1}}>
-                <Text>AAA</Text>
+                <AppContainer screenProps={this.props.navigation}/>
             </View>
         )
     }
 }
 
-export const orderStyles = StyleSheet.create({
-    header: {
-        backgroundColor: PRIMARY_COLOR,
-        flexDirection: 'row',
-        paddingHorizontal: SIZE["24"],
-        alignItems: 'center',
-        paddingBottom: 17.5,
-        paddingTop: 10.5
-    },
-    headerTitle: {
-        fontSize: 24,
-        color: '#fff',
-        lineHeight: 36,
-        textAlign: 'center',
-        flex: 1,
-        fontWeight: 'bold'
-    },
-    btnGoBack: {
-    }
-})
-const mapStateToProps = state => ({
-    isLoginState: state.auth.isLoginState
-});
+const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {
-}
-
+const mapDispatchToProps = {}
 
 export default connect(
     mapStateToProps,

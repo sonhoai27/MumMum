@@ -13,7 +13,7 @@ import Restaurant from "./Screens/Restaurant/RestaurantScreen";
 import SearchSreen from "./Screens/SearchSreen";
 import OrderScreen from "./Screens/Order/OrderScreen";
 import Icons from "react-native-vector-icons/Ionicons";
-
+import NotifyScreen from "./Screens/NotifyScreen";
 
 const AuthStack = createStackNavigator(
     {
@@ -47,10 +47,10 @@ const SearchStack = createStackNavigator(
 );
 const OrderStack = createStackNavigator(
     {
-        Order: {screen: OrderScreen}
+        Order: {screen: OrderScreen},
     },
     {
-        initialRouteName: 'Order',
+        initialRouteName: 'Order'
     }
 );
 const AccountStack = createStackNavigator(
@@ -59,6 +59,14 @@ const AccountStack = createStackNavigator(
     },
     {
         initialRouteName: 'Account',
+    }
+);
+const NotifyStack = createStackNavigator(
+    {
+        Notify: {screen: NotifyScreen}
+    },
+    {
+        initialRouteName: 'Notify',
     }
 );
 
@@ -83,6 +91,13 @@ const AppStack = createBottomTabNavigator(
             navigationOptions: ({ navigation }) => ({
                 title: "Giỏ hàng",
                 tabBarIcon: ({ tintColor }) => <Icons name="ios-basket" size={20} color={tintColor}/>
+            })
+        },
+        Notify: {
+            screen: NotifyStack,
+            navigationOptions: ({ navigation }) => ({
+                title: "Thông báo",
+                tabBarIcon: ({ tintColor }) => <Icons name="ios-notifications" size={20} color={tintColor}/>
             })
         },
         User:  {

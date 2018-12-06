@@ -9,14 +9,28 @@ import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
 import {winSize} from "./NearMe";
 import StarRating from "../../StarRating/StarRating";
 import YouTube from "react-native-youtube/YouTube.android";
-type BaseComponentProps = {
+type IntroProps = {
     navigation: any;
 }
 
-class Intro extends React.Component<BaseComponentProps> {
+type IntroStates = {
+    isOK: boolean;
+}
+class Intro extends React.Component<IntroProps,IntroStates> {
 
     constructor(props) {
         super(props)
+        this.state = {
+            isOK: false,
+        }
+    }
+
+    componentDidMount(): void {
+        if (this.props.screenProps.state.params.item.RESTAURANT){
+            this.setState({
+                isOK: true,
+            })
+        }
     }
 
     render() {
@@ -64,16 +78,18 @@ class Intro extends React.Component<BaseComponentProps> {
                         marginBottom: SIZE["32"],
                         fontWeight: 'bold'
                     }}>Video giới thiệu</Text>
-                    <YouTube
-                        apiKey={'AIzaSyDv5E3Z5oRP4UwzqLkNWK60wCToLD0j1zw'}
-                        videoId="TQUhVf4gTM0"
-                        play={false}
-                        fullscreen={false}
-                        loop={true}
-                        style={{
-                            alignSelf: 'stretch', height: 300
-                        }}
-                    />
+                    {
+                        this.state.isOK ? <YouTube
+                            apiKey={'AIzaSyDv5E3Z5oRP4UwzqLkNWK60wCToLD0j1zw'}
+                            videoId="TQUhVf4gTM0"
+                            play={false}
+                            fullscreen={false}
+                            loop={true}
+                            style={{
+                                alignSelf: 'stretch', height: 300
+                            }}
+                        /> : <View/>
+                    }
                 </View>
             </ScrollView>
         )

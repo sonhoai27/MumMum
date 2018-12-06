@@ -5,6 +5,7 @@ const initialState = {
     ordersState: [],
     historyOrdersOfUserState: [],
     detailOrderByIdState: [],
+    shoppingCartState: []
 };
 
 export default (state = initialState, action) => {
@@ -45,6 +46,14 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 detailOrderByIdState: action.payload.data
+            }
+        }
+
+
+        case (ACTION_TYPES.SHOPPING_CART): {
+            return {
+                ...state,
+                shoppingCartState: action.payload
             }
         }
 

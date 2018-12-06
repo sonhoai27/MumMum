@@ -9,8 +9,14 @@ import {
 
 import Home from "./Screens/HomeScreen";
 import {PRIMARY_COLOR} from "../configs/Const";
+import {addToCart} from "../stores/order/OrderActions";
+import {_retrieveData} from "../configs/LocalStorage";
 
-class AppFoodScreen extends React.Component {
+type AppFoodScreenProps = {
+    addToCart: Function;
+    shoppingCartState: any;
+}
+class AppFoodScreen extends React.Component<AppFoodScreenProps> {
     static navigationOptions = {
         title: 'Trang chủ',
         headerStyle: {
@@ -26,7 +32,16 @@ class AppFoodScreen extends React.Component {
     };
     constructor(props) {
         super(props)
+        this.getSessionOrder();
     }
+
+    getSessionOrder = () => {
+        _retrieveData("@ORDERS", (result) => {
+            if (!result.message) {
+                this.props.addToCart(this.props.shoppingCartState, result, 1);
+            }
+        })
+    };
 
     render() {
         return (
@@ -52,9 +67,11 @@ export const rootStyles = StyleSheet.create({
     }
 })
 const mapStateToProps = state => ({
+    shoppingCartState: state.order.shoppingCartState
 });
 
 const mapDispatchToProps = {
+    addToCart
 }
 
 export default connect(
