@@ -34,7 +34,12 @@ class Menus extends React.Component<CategoryProps> {
     }
 
     addToCart = (food) => {
-        this.props.addToCart(this.props.shoppingCartState,food);
+        this.props.addToCart(this.props.shoppingCartState,{
+            food,
+            idFood: food.id,
+            quantity: 1,
+            note: ""
+        });
     };
 
     resItem = (item) => (

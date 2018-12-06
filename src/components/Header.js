@@ -17,6 +17,9 @@ export const listIcon = (<Icon name="ios-list" size={20} color="#000"/>)
 export const arrowBackIcon = (<Icon name="ios-arrow-back" size={28} color="#fff"/>);
 export const notificationsIcon = (<Icon name="ios-notifications" size={20} color="#000"/>);
 export const addIcon = (<Icon name="ios-add" size={24} color="#fff"/>)
+export const addIcon2 = (<Icon name="ios-add-circle-outline" size={32} color="#fff"/>)
+export const checkmarkIcon = (<Icon name="ios-checkmark-circle-outline" size={32} color="#fff"/>)
+export const removeIcon = (<Icon name="ios-remove-circle-outline" size={32} color="#fff"/>)
 export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR}/>);
 export const basketIcon = (<IconFeather name="shopping-bag" size={SIZE["24"]} color="#000"/>);
 export const accountIcon = (<Icon name="ios-person" size={SIZE["24"]} color="#000"/>)
