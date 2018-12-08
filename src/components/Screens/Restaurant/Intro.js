@@ -8,7 +8,14 @@ import {
 import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
 import {winSize} from "./NearMe";
 import StarRating from "../../StarRating/StarRating";
-import YouTube from "react-native-youtube/YouTube.android";
+import HTML from 'react-native-render-html';
+// import YouTube from "react-native-youtube/YouTube.android";
+const htmlContent = `
+    <iframe width="${winSize.width}" height="${winSize.width/2}" src="https://www.youtube.com/embed/dUruC27B9Wc"
+    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>
+`;
+
 type IntroProps = {
     navigation: any;
 }
@@ -39,7 +46,7 @@ class Intro extends React.Component<IntroProps,IntroStates> {
                 <View style={{
                     flex: 1,
                     backgroundColor: '#fff',
-                    paddingBottom: 40
+                    paddingBottom: 32,
                 }}>
                     <Image
                         style={{
@@ -71,25 +78,27 @@ class Intro extends React.Component<IntroProps,IntroStates> {
                 <View style={{
                     flex: 1,
                     alignItems: 'center',
-                    marginVertical: SIZE["32"]
+                    marginVertical: SIZE["32"],
+                    paddingBottom: SIZE["40"]
                 }}>
                     <Text style={{
                         fontSize: SIZE["16"],
-                        marginBottom: SIZE["32"],
+                        marginBottom: SIZE["40"],
                         fontWeight: 'bold'
                     }}>Video giới thiệu</Text>
-                    {
-                        this.state.isOK ? <YouTube
-                            apiKey={'AIzaSyDv5E3Z5oRP4UwzqLkNWK60wCToLD0j1zw'}
-                            videoId="TQUhVf4gTM0"
-                            play={false}
-                            fullscreen={false}
-                            loop={true}
-                            style={{
-                                alignSelf: 'stretch', height: 300
-                            }}
-                        /> : <View/>
-                    }
+                    {/*{*/}
+                        {/*this.state.isOK ? <YouTube*/}
+                            {/*apiKey={'AIzaSyDv5E3Z5oRP4UwzqLkNWK60wCToLD0j1zw'}*/}
+                            {/*videoId="TQUhVf4gTM0"*/}
+                            {/*play={false}*/}
+                            {/*fullscreen={false}*/}
+                            {/*loop={true}*/}
+                            {/*style={{*/}
+                                {/*alignSelf: 'stretch', height: 300*/}
+                            {/*}}*/}
+                        {/*/> : <View/>*/}
+                    {/*}*/}
+                    <HTML html={htmlContent} imagesMaxWidth={winSize.width} />
                 </View>
             </ScrollView>
         )

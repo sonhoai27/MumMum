@@ -9,6 +9,7 @@ import {PRIMARY_COLOR, SIZE} from "../configs/Const";
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconFeather from 'react-native-vector-icons/Feather';
+import IconAnt from 'react-native-vector-icons/AntDesign';
 import {setStatusOrderModal} from "../stores/order/OrderActions";
 
 export const searchIcon = (<Icon name="ios-search" size={20} color="#999"/>)
@@ -16,10 +17,12 @@ export const albumsIcon = (<Icon name="ios-albums" size={20} color="#000"/>)
 export const listIcon = (<Icon name="ios-list" size={20} color="#000"/>)
 export const arrowBackIcon = (<Icon name="ios-arrow-back" size={28} color="#fff"/>);
 export const notificationsIcon = (<Icon name="ios-notifications" size={20} color="#000"/>);
-export const addIcon = (<Icon name="ios-add" size={24} color="#fff"/>)
+export const addIcon = (<Icon name="ios-add" size={24} color={PRIMARY_COLOR}/>)
+export const editIcon = (<IconAnt name="edit" size={20} color={PRIMARY_COLOR}/>)
 export const addIcon2 = (<Icon name="ios-add-circle-outline" size={32} color="#fff"/>)
 export const checkmarkIcon = (<Icon name="ios-checkmark-circle-outline" size={32} color="#fff"/>)
 export const removeIcon = (<Icon name="ios-remove-circle-outline" size={32} color="#fff"/>)
+export const removeIcon2 = (<Icon name="ios-remove" size={32} color={PRIMARY_COLOR}/>)
 export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR}/>);
 export const basketIcon = (<IconFeather name="shopping-bag" size={SIZE["24"]} color="#000"/>);
 export const accountIcon = (<Icon name="ios-person" size={SIZE["24"]} color="#000"/>)

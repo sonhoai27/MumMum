@@ -9,7 +9,7 @@ import {
     TouchableOpacity
 } from 'react-native'
 import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
-import { addIcon, headerStyles } from "../../Header";
+import {addIcon, editIcon, headerStyles, removeIcon, removeIcon2} from "../../Header";
 import {getMenusRes} from "../../../stores/lists/ListActions";
 import {winSize} from "./NearMe";
 import {addToCart} from "../../../stores/order/OrderActions";
@@ -46,49 +46,82 @@ class Menus extends React.Component<CategoryProps> {
         <TouchableWithoutFeedback>
             <View style={{
                 margin: 12,
-                borderRadius: SIZE["8"],
-                backgroundColor: '#fafafa',
-                overflow: 'hidden',
                 flexDirection: 'row',
-                borderBottomColor: '#eee',
-                borderBottomWidth: 1,
+                marginBottom: SIZE["24"],
             }}>
                 <Image style={{
-                    width: winSize.width/4,
-                    height: winSize.width/4
+                    borderRadius: SIZE["8"],
+                    width: winSize.width/5,
+                    height: winSize.width/5
                 }} source={{uri: item.image}}/>
 
                 <View style={{
                     flexDirection: 'column',
-                    margin: SIZE["8"],
+                    marginHorizontal: SIZE["8"],
                     flex: 1,
                 }}>
                     <Text style={{
                         textAlign: 'left',
                         fontSize: 14,
                         color: PRIMARY_COLOR,
-                        fontWeight: 'bold'
+                        lineHeight: 14
                     }}>{item.name}</Text>
                     <Text style={{
                         textAlign: 'left',
-                        fontSize: 16,
+                        fontSize: 13,
                         color: '#333'
-                    }}>{(item.price).toLocaleString('vn')}đ</Text>
+                    }}>{(item.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</Text>
+                    {/*<View style={{*/}
+                        {/*position: 'absolute',*/}
+                        {/*bottom: 0,*/}
+                        {/*right: 0,*/}
+                        {/*paddingHorizontal: SIZE["16"],*/}
+                        {/*paddingVertical: SIZE["4"],*/}
+                        {/*borderRadius: SIZE["16"],*/}
+                        {/*justifyContent: 'center',*/}
+                        {/*alignItems: 'center',*/}
+                        {/*elevation: 2,*/}
+                        {/*backgroundColor: PRIMARY_COLOR,*/}
+                    {/*}}>*/}
+                        {/*<TouchableOpacity onPress={()=> this.addToCart(item)}>*/}
+                            {/*<Text style={{*/}
+                                {/*color: '#fff',*/}
+                            {/*}}>Thêm</Text>*/}
+                        {/*</TouchableOpacity>*/}
+                    {/*</View>*/}
                     <View style={{
                         position: 'absolute',
                         bottom: 0,
                         right: 0,
-                        width: 28,
-                        height: 28,
-                        borderRadius: SIZE["120"],
-                        justifyContent: 'center',
+                        justifyContent: 'space-between',
+                        flexDirection: 'row',
                         alignItems: 'center',
-                        elevation: 2,
-                        backgroundColor: PRIMARY_COLOR,
                     }}>
-                        <TouchableOpacity onPress={()=> this.addToCart(item)}>
-                            {addIcon}
+                        <TouchableOpacity style={{
+                            elevation: 2,
+                            borderRadius: SIZE["4"],
+                            padding: 4,
+                            marginRight: SIZE["16"],
+                            backgroundColor: '#fff'}
+                        }>
+                            {editIcon}
                         </TouchableOpacity>
+                        <View style={{
+                            borderRadius: SIZE["4"],
+                            justifyContent: 'space-between',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            elevation: 2,
+                            backgroundColor: '#fff',
+                        }}>
+                            <TouchableOpacity style={{paddingHorizontal: 8}}>
+                                {addIcon}
+                            </TouchableOpacity>
+                            <Text style={{paddingHorizontal: 8}}>1</Text>
+                            <TouchableOpacity style={{paddingHorizontal: 8}}>
+                                {removeIcon2}
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
 
@@ -112,10 +145,10 @@ class Menus extends React.Component<CategoryProps> {
     render() {
         return (
             <ScrollView showsVerticalScrollIndicator={false} style={{
-
+                paddingTop: SIZE["24"],
             }}>
-                <View style={{flex: 1}}>
-                    <View style={{padding: 12}}>
+                <View style={{flex: 1, paddingBottom: SIZE["24"]}}>
+                    <View style={{padding: 0}}>
                         {this.renderListMenus()}
                     </View>
                 </View>
@@ -123,6 +156,7 @@ class Menus extends React.Component<CategoryProps> {
         )
     }
 }
+
 const mapStateToProps = state => ({
     menuOfResState: state.lists.menuOfResState,
     shoppingCartState: state.order.shoppingCartState

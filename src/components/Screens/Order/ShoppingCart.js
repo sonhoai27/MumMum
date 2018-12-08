@@ -2,11 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {
     View,
-    Text, FlatList, TouchableOpacity, StyleSheet
+    Text, FlatList, TouchableOpacity, StyleSheet,ToastAndroid
 } from 'react-native'
 import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
 import {addIcon2, checkmarkIcon, removeIcon} from "../../Header";
-import {winSize} from "../Restaurant/NearMe";
 
 type SCProps = {
     navigation: any;
@@ -40,9 +39,9 @@ class MyShoppingCart extends React.Component<SCProps,SCStates> {
                 <View style={{
                     borderBottomColor: '#eee',
                     borderBottomWidth: this.state.currentItem === index ? 0 : 1,
-                    paddingBottom: 20,
+                    paddingBottom: 16,
                     marginBottom: index === (this.props.shoppingCartState.length - 1) ? 100 : 0,
-                    paddingTop: 20,
+                    paddingTop: 16,
                     paddingLeft: SIZE["8"],
                     paddingRight: SIZE["8"],
                     alignItems: 'center',
@@ -107,7 +106,9 @@ class MyShoppingCart extends React.Component<SCProps,SCStates> {
                         </TouchableOpacity>
                     </View>
                     <View style={shoppingCartStyles.container__qtyclose}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onLongPress={()=> {
+                            ToastAndroid.show('Chấp nhận!', ToastAndroid.SHORT);
+                        }}>
                             {checkmarkIcon}
                         </TouchableOpacity>
                     </View>
