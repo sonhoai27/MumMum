@@ -6,13 +6,17 @@ import {
     ScrollView,
     TouchableWithoutFeedback,
     Image, FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    Modal,
+    Animated, Easing, Dimensions
 } from 'react-native'
 import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
-import {addIcon, editIcon, headerStyles, removeIcon, removeIcon2} from "../../Header";
+import {addIcon, editIcon, removeIcon2} from "../../Header";
 import {getMenusRes} from "../../../stores/lists/ListActions";
 import {winSize} from "./NearMe";
 import {addToCart} from "../../../stores/order/OrderActions";
+import NoteAdd from "./NoteAdd";
+import {issetOrder} from "../../../configs/IssetOrder";
 
 type CategoryProps = {
     navigation: any;
@@ -21,25 +25,48 @@ type CategoryProps = {
     shoppingCartState?: any;
     addToCart: Function;
 }
-class Menus extends React.Component<CategoryProps> {
+
+type MenuStates = {
+    modalVisible: boolean;
+}
+
+class Menus extends React.Component<CategoryProps, MenuStates> {
     static navigationOptions = {
         header: null
     };
+
+    setModalVisible() {
+        this.setState({
+            modalVisible: !this.state.modalVisible
+        });
+    }
+
     constructor(props) {
         super(props)
-        console.log(this.props.screenProps)
+        this.state = {
+            modalVisible: false
+        }
     }
+
     componentDidMount(): void {
         this.props.getMenusRes(this.props.screenProps.state.params.item.id)
     }
 
     addToCart = (food) => {
-        this.props.addToCart(this.props.shoppingCartState,{
+        this.props.addToCart(this.props.shoppingCartState, {
             food,
             idFood: food.id,
             quantity: 1,
             note: ""
         });
+    };
+
+    showQty = (idFood, carts) => {
+        const item = carts.filter(element => {
+            return element.idFood === idFood
+        });
+
+        return item[0].quantity;
     };
 
     resItem = (item) => (
@@ -51,8 +78,8 @@ class Menus extends React.Component<CategoryProps> {
             }}>
                 <Image style={{
                     borderRadius: SIZE["8"],
-                    width: winSize.width/5,
-                    height: winSize.width/5
+                    width: winSize.width / 5,
+                    height: winSize.width / 5
                 }} source={{uri: item.image}}/>
 
                 <View style={{
@@ -71,58 +98,84 @@ class Menus extends React.Component<CategoryProps> {
                         fontSize: 13,
                         color: '#333'
                     }}>{(item.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</Text>
-                    {/*<View style={{*/}
-                        {/*position: 'absolute',*/}
-                        {/*bottom: 0,*/}
-                        {/*right: 0,*/}
-                        {/*paddingHorizontal: SIZE["16"],*/}
-                        {/*paddingVertical: SIZE["4"],*/}
-                        {/*borderRadius: SIZE["16"],*/}
-                        {/*justifyContent: 'center',*/}
-                        {/*alignItems: 'center',*/}
-                        {/*elevation: 2,*/}
-                        {/*backgroundColor: PRIMARY_COLOR,*/}
-                    {/*}}>*/}
-                        {/*<TouchableOpacity onPress={()=> this.addToCart(item)}>*/}
-                            {/*<Text style={{*/}
-                                {/*color: '#fff',*/}
-                            {/*}}>Thêm</Text>*/}
-                        {/*</TouchableOpacity>*/}
-                    {/*</View>*/}
-                    <View style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        right: 0,
-                        justifyContent: 'space-between',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                    }}>
-                        <TouchableOpacity style={{
-                            elevation: 2,
-                            borderRadius: SIZE["4"],
-                            padding: 4,
-                            marginRight: SIZE["16"],
-                            backgroundColor: '#fff'}
-                        }>
-                            {editIcon}
-                        </TouchableOpacity>
-                        <View style={{
-                            borderRadius: SIZE["4"],
+                    {
+                        issetOrder(item.id, this.props.shoppingCartState) ? <View style={{
+                            position: 'absolute',
+                            bottom: 0,
+                            right: 0,
                             justifyContent: 'space-between',
                             flexDirection: 'row',
                             alignItems: 'center',
-                            elevation: 2,
-                            backgroundColor: '#fff',
                         }}>
-                            <TouchableOpacity style={{paddingHorizontal: 8}}>
-                                {addIcon}
+                            <TouchableOpacity
+                                onPress={() => {
+                                    this.setModalVisible()
+                                }}
+                                style={{
+                                    elevation: 2,
+                                    borderRadius: SIZE["4"],
+                                    padding: 4,
+                                    marginRight: SIZE["16"],
+                                    backgroundColor: '#fff'
+                                }
+                                }>
+                                {editIcon}
                             </TouchableOpacity>
-                            <Text style={{paddingHorizontal: 8}}>1</Text>
-                            <TouchableOpacity style={{paddingHorizontal: 8}}>
-                                {removeIcon2}
+                            <View style={{
+                                borderRadius: SIZE["4"],
+                                justifyContent: 'space-between',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                elevation: 2,
+                                backgroundColor: '#fff',
+                            }}>
+                                <TouchableOpacity
+                                    onPress={()=> {
+                                        this.props.addToCart(this.props.shoppingCartState, {
+                                            item,
+                                            idFood: item.id,
+                                            quantity: 1,
+                                            note: ""
+                                        });
+                                    }}
+                                    style={{paddingHorizontal: 8}}>
+                                    {addIcon}
+                                </TouchableOpacity>
+                                <Text style={{paddingHorizontal: 8}}>
+                                    {this.showQty(item.id, this.props.shoppingCartState)}
+                                </Text>
+                                <TouchableOpacity
+                                    onPress={()=> {
+                                        this.props.addToCart(this.props.shoppingCartState, {
+                                            item,
+                                            idFood: item.id,
+                                            quantity: 1,
+                                            note: ""
+                                        }, 0, 1);
+                                    }}
+                                    style={{paddingHorizontal: 8}}>
+                                    {removeIcon2}
+                                </TouchableOpacity>
+                            </View>
+                        </View> : <View style={{
+                            position: 'absolute',
+                            bottom: 0,
+                            right: 0,
+                            paddingHorizontal: SIZE["16"],
+                            paddingVertical: SIZE["4"],
+                            borderRadius: SIZE["16"],
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            elevation: 2,
+                            backgroundColor: PRIMARY_COLOR,
+                        }}>
+                            <TouchableOpacity onPress={() => this.addToCart(item)}>
+                                <Text style={{
+                                    color: '#fff',
+                                }}>Thêm</Text>
                             </TouchableOpacity>
                         </View>
-                    </View>
+                    }
                 </View>
 
             </View>
@@ -132,9 +185,10 @@ class Menus extends React.Component<CategoryProps> {
     _keyExtractor = (item, index) => item.id + "";
 
     renderListMenus = () => {
-        if (this.props.menuOfResState.menu){
+        if (this.props.menuOfResState.menu) {
             return (
                 <FlatList
+                    extraData={this.props.shoppingCartState}
                     data={this.props.menuOfResState.menu}
                     renderItem={({item}) => this.resItem(item)}
                     keyExtractor={this._keyExtractor}/>
@@ -152,6 +206,9 @@ class Menus extends React.Component<CategoryProps> {
                         {this.renderListMenus()}
                     </View>
                 </View>
+                <NoteAdd modalVisible={this.state.modalVisible} setModalVisible={() => {
+                    this.setModalVisible();
+                }}/>
             </ScrollView>
         )
     }

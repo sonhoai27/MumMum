@@ -16,6 +16,7 @@ export const searchIcon = (<Icon name="ios-search" size={20} color="#999"/>)
 export const albumsIcon = (<Icon name="ios-albums" size={20} color="#000"/>)
 export const listIcon = (<Icon name="ios-list" size={20} color="#000"/>)
 export const arrowBackIcon = (<Icon name="ios-arrow-back" size={28} color="#fff"/>);
+export const arrowDownIcon = (<Icon name="ios-arrow-down" size={28} color="#000"/>);
 export const notificationsIcon = (<Icon name="ios-notifications" size={20} color="#000"/>);
 export const addIcon = (<Icon name="ios-add" size={24} color={PRIMARY_COLOR}/>)
 export const editIcon = (<IconAnt name="edit" size={20} color={PRIMARY_COLOR}/>)
