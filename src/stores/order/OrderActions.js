@@ -32,6 +32,8 @@ export const apiGetDetailOrderById= (token) => async dispatch => {
     })
 }
 
+// ooen la check xem ham nay su dung khi mo app hay la dang trong qua trinh app chay
+// type là kieu them vao gio hang, them hoac giam
 export const addToCart = (cart, item, open = 0, type = 0) => dispatch => {
     let tempCart = makeQty(cart, item, open, type);
     _retrieveData("@ORDERS", (result) => {
