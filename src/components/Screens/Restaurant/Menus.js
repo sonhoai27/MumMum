@@ -17,6 +17,7 @@ import {winSize} from "./NearMe";
 import {addToCart} from "../../../stores/order/OrderActions";
 import NoteAdd from "./NoteAdd";
 import {issetOrder} from "../../../configs/IssetOrder";
+import SuccessAlert from "../../shared/SuccessAlert";
 
 type CategoryProps = {
     navigation: any;
@@ -198,18 +199,21 @@ class Menus extends React.Component<CategoryProps, MenuStates> {
 
     render() {
         return (
-            <ScrollView showsVerticalScrollIndicator={false} style={{
-                paddingTop: SIZE["24"],
-            }}>
-                <View style={{flex: 1, paddingBottom: SIZE["24"]}}>
-                    <View style={{padding: 0}}>
-                        {this.renderListMenus()}
+            <View style={{flex: 1}}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{
+                    paddingTop: SIZE["24"],
+                }}>
+                    <View style={{flex: 1, paddingBottom: SIZE["24"]}}>
+                        <View style={{padding: 0}}>
+                            {this.renderListMenus()}
+                        </View>
                     </View>
-                </View>
-                <NoteAdd modalVisible={this.state.modalVisible} setModalVisible={() => {
-                    this.setModalVisible();
-                }}/>
-            </ScrollView>
+                    <NoteAdd modalVisible={this.state.modalVisible} setModalVisible={() => {
+                        this.setModalVisible();
+                    }}/>
+                </ScrollView>
+                <SuccessAlert text={'Thêm vào giỏ hàng thành công!'}/>
+            </View>
         )
     }
 }

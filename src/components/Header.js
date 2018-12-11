@@ -22,6 +22,7 @@ export const addIcon = (<Icon name="ios-add" size={24} color={PRIMARY_COLOR}/>)
 export const editIcon = (<IconAnt name="edit" size={20} color={PRIMARY_COLOR}/>)
 export const addIcon2 = (<Icon name="ios-add-circle-outline" size={32} color="#fff"/>)
 export const checkmarkIcon = (<Icon name="ios-checkmark-circle-outline" size={32} color="#fff"/>)
+export const checkmarkSuccessIcon = (size: number) => (<Icon name="ios-checkmark-circle-outline" size={size} color={PRIMARY_COLOR}/>)
 export const removeIcon = (<Icon name="ios-remove-circle-outline" size={32} color="#fff"/>)
 export const removeIcon2 = (<Icon name="ios-remove" size={32} color={PRIMARY_COLOR}/>)
 export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR}/>);
