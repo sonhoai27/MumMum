@@ -98,7 +98,13 @@ const makeQty = (list, item, open, type) => {
                 if(type === 0){
                     e.quantity = e.quantity + 1;
                 }else {
-                    e.quantity = e.quantity === 1 ? 1 : e.quantity - 1;
+                    if(e.quantity === 1){
+                        tempInitState = tempInitState.filter((element) => {
+                            return element.idFood !== item.idFood
+                        });
+                    }else {
+                        e.quantity = e.quantity - 1;
+                    }
                 }
             }
         })

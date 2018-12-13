@@ -9,6 +9,7 @@ import {
 import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
 import {removeProductFromShoppingCart} from "../../../stores/order/OrderActions";
 import {winSize} from "../Restaurant/NearMe";
+import {basketIcon} from "../../Header";
 
 type SCProps = {
     navigation: any;
@@ -30,6 +31,13 @@ class MyShoppingCart extends React.Component<SCProps, SCStates> {
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
     }
 
+    totalMoney = () => {
+        let total = 0;
+        for(var i = 0; i < this.props.shoppingCartState.length; i++){
+            total = total + this.props.shoppingCartState[i].quantity*this.props.shoppingCartState[i].food.price
+        }
+        return total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    };
     resItem = (item, index) => {
         return (
             <TouchableOpacity
@@ -122,15 +130,29 @@ class MyShoppingCart extends React.Component<SCProps, SCStates> {
                             justifyContent: 'center',
                             flex: 1
                         }}>
-                        <Image
-                            style={{
-                                width: winSize.width*0.9,
-                                height: winSize.width*0.6,
-                            }}
-                            source={{uri: 'http://goodtogostore.com/assets/images/empty-cart.png'}}/>
-                    </View>
+                            <Image
+                                style={{
+                                    width: winSize.width * 0.9,
+                                    height: winSize.width * 0.6,
+                                }}
+                                source={{uri: 'http://goodtogostore.com/assets/images/empty-cart.png'}}/>
+                        </View>
                 }
-                <View style={shoppingCartStyles.container__qty}>
+                <View style={shoppingCartStyles.qty}>
+                    <View style={{flex: 1}}>
+                        <Text style={{
+                            fontSize: 12,
+                            color: '#fff',
+                            fontWeight: 'bold'
+                        }}>{this.props.shoppingCartState.length} mục | {this.totalMoney()}</Text>
+                        <Text style={{
+                            color: '#fff', fontSize: 10,
+                            fontWeight: 'bold'
+                        }}>104 Tăng Nhơn Phú A, Quận 9, Hồ chí Minh</Text>
+                    </View>
+                    <View>
+                        {basketIcon}
+                    </View>
                 </View>
             </View>
         )
@@ -140,35 +162,17 @@ class MyShoppingCart extends React.Component<SCProps, SCStates> {
 export const shoppingCartStyles = StyleSheet.create({
     qty: {
         backgroundColor: PRIMARY_COLOR,
-        paddingHorizontal: SIZE["16"],
-        borderRadius: SIZE["8"],
-        elevation: 4,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        flex: 5,
-        marginRight: 32,
-    },
-    container__qty: {
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        position: 'absolute',
-        bottom: SIZE["16"],
-        left: '10%',
-        right: '10%',
-        flex: 1
-    },
-    container__qtyclose: {
+        borderRadius: SIZE["4"],
         elevation: 3,
-        flex: 1,
-        backgroundColor: PRIMARY_COLOR,
-        borderRadius: 120,
-        paddingHorizontal: 8,
-        paddingVertical: 9,
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-    }
+        position: 'absolute',
+        right: '8%',
+        left: '8%',
+        bottom: '4%',
+        paddingVertical: SIZE["8"],
+        paddingHorizontal: SIZE["16"],
+    },
 })
 const mapStateToProps = state => ({
     shoppingCartState: state.order.shoppingCartState
