@@ -7,8 +7,7 @@ import {
     TouchableWithoutFeedback,
     Image, FlatList,
     TouchableOpacity,
-    Modal,
-    Animated, Easing, Dimensions
+    ToastAndroid
 } from 'react-native'
 import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
 import {addIcon, editIcon, removeIcon2} from "../../Header";
@@ -17,7 +16,6 @@ import {winSize} from "./NearMe";
 import {addToCart} from "../../../stores/order/OrderActions";
 import NoteAdd from "./NoteAdd";
 import {issetOrder} from "../../../configs/IssetOrder";
-import SuccessAlert from "../../shared/SuccessAlert";
 
 type CategoryProps = {
     navigation: any;
@@ -25,6 +23,8 @@ type CategoryProps = {
     menuOfResState?: any;
     shoppingCartState?: any;
     addToCart: Function;
+    statusAddToCard: Function;
+    statusAddToCartState: any;
 }
 
 type MenuStates = {
@@ -51,6 +51,12 @@ class Menus extends React.Component<CategoryProps, MenuStates> {
 
     componentDidMount(): void {
         this.props.getMenusRes(this.props.screenProps.state.params.item.id)
+    }
+
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+        if(this.props.shoppingCartState !== prevProps.shoppingCartState){
+            ToastAndroid.show('Thành công!', ToastAndroid.SHORT);
+        }
     }
 
     addToCart = (food) => {
@@ -212,7 +218,6 @@ class Menus extends React.Component<CategoryProps, MenuStates> {
                         this.setModalVisible();
                     }}/>
                 </ScrollView>
-                <SuccessAlert text={'Thêm vào giỏ hàng thành công!'}/>
             </View>
         )
     }

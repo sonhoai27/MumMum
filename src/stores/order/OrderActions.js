@@ -37,9 +37,9 @@ export const apiGetDetailOrderById= (token) => async dispatch => {
 export const addToCart = (cart, item, open = 0, type = 0) => dispatch => {
     let tempCart = makeQty(cart, item, open, type);
     _retrieveData("@ORDERS", (result) => {
-        if (!result.message){
+        if (!result.message && result.message !== undefined){
+            console.log('c',result.message);
             _removeData("@ORDERS", result => {
-                console.log('CU')
                 _storeData("@ORDERS", tempCart, (result) => {
                     if (result.message === 200){
                         dispatch({
@@ -60,6 +60,23 @@ export const addToCart = (cart, item, open = 0, type = 0) => dispatch => {
                 }
             });
         }
+    })
+};
+
+export const removeProductFromShoppingCart = (cart, idFood) => dispatch => {
+    let tempCart = [...[], ...cart];
+    let currentCart = tempCart.filter((element) => {
+        return element.idFood !== idFood
+    });
+    _removeData("@ORDERS", result => {
+        _storeData("@ORDERS", currentCart, (result) => {
+            if (result.message === 200){
+                dispatch({
+                    type: ACTION_TYPES.SHOPPING_CART,
+                    payload: currentCart
+                })
+            }
+        });
     })
 };
 

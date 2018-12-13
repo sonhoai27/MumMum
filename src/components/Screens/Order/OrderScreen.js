@@ -8,7 +8,6 @@ import {PRIMARY_COLOR} from "../../../configs/Const";
 import {winSize} from "../Restaurant/NearMe";
 import HistoryOrders from "./HistoryOrders";
 import ShoppingCart from "./ShoppingCart";
-import Icons from "react-native-vector-icons/Ionicons";
 type OrderScreenProps = {
     navigation: any;
 }
@@ -82,7 +81,9 @@ class OrderScreen extends React.Component<OrderScreenProps, OrderScreenState> {
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+
+}
 
 export default connect(
     mapStateToProps,

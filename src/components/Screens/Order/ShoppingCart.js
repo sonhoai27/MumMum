@@ -2,19 +2,24 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {
     View,
-    Text, FlatList, TouchableOpacity, StyleSheet,ToastAndroid
+    Text, FlatList,
+    TouchableOpacity, StyleSheet,
+    Alert, ToastAndroid, Image
 } from 'react-native'
 import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
-import {addIcon2, checkmarkIcon, removeIcon} from "../../Header";
+import {removeProductFromShoppingCart} from "../../../stores/order/OrderActions";
+import {winSize} from "../Restaurant/NearMe";
 
 type SCProps = {
     navigation: any;
     shoppingCartState?: any;
+    removeProductFromShoppingCart: Function;
 }
 type SCStates = {
     currentItem: number
 }
-class MyShoppingCart extends React.Component<SCProps,SCStates> {
+
+class MyShoppingCart extends React.Component<SCProps, SCStates> {
     constructor(props) {
         super(props)
         this.state = {
@@ -22,19 +27,34 @@ class MyShoppingCart extends React.Component<SCProps,SCStates> {
         }
     }
 
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+    }
+
     resItem = (item, index) => {
         return (
             <TouchableOpacity
                 style={{flex: 1}}
-                onPress={()=> {
+                onPress={() => {
                     this.setState({
                         currentItem: index
-                    }, ()=> {
+                    }, () => {
                         console.log(this.state.currentItem === index)
                     })
                 }}
                 onLongPress={() => {
-                    alert(item.food.name);
+                    Alert.alert(
+                        'Thông báo',
+                        'Xóa ' + item.food.name + ' khỏi giỏ hàng?',
+                        [
+                            {
+                                text: 'Chấp nhận', onPress: () => {
+                                    this.props.removeProductFromShoppingCart(this.props.shoppingCartState, item.idFood)
+                                }
+                            },
+                            {text: 'Hủy', onPress: () => console.log('OK Pressed'), style: 'cancel'},
+                        ],
+                        {cancelable: true}
+                    )
                 }}>
                 <View style={{
                     borderBottomColor: '#eee',
@@ -48,7 +68,7 @@ class MyShoppingCart extends React.Component<SCProps,SCStates> {
                     justifyContent: 'space-between',
                     flexDirection: 'row',
                     borderRadius: SIZE["8"],
-                    backgroundColor: this.state.currentItem === index ? '#dcffed': '#fff'
+                    backgroundColor: this.state.currentItem === index ? '#dcffed' : '#fff'
                 }}>
                     <Text style={{
                         fontSize: SIZE["16"],
@@ -94,24 +114,23 @@ class MyShoppingCart extends React.Component<SCProps,SCStates> {
                 backgroundColor: '#fff',
                 paddingHorizontal: SIZE["16"]
             }}>
-                {this.renderShoppingCart()}
-                <View style={shoppingCartStyles.container__qty}>
-                    <View style={shoppingCartStyles.qty}>
-                        <TouchableOpacity style={{padding: SIZE["8"]}}>
-                            {addIcon2}
-                        </TouchableOpacity>
-                        <Text style={{color: '#fff', fontSize: 20}}>1</Text>
-                        <TouchableOpacity style={{padding: SIZE["8"]}}>
-                            {removeIcon}
-                        </TouchableOpacity>
-                    </View>
-                    <View style={shoppingCartStyles.container__qtyclose}>
-                        <TouchableOpacity onLongPress={()=> {
-                            ToastAndroid.show('Chấp nhận!', ToastAndroid.SHORT);
+                {
+                    this.props.shoppingCartState.length > 0 ?
+                        this.renderShoppingCart() :
+                        <View style={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flex: 1
                         }}>
-                            {checkmarkIcon}
-                        </TouchableOpacity>
+                        <Image
+                            style={{
+                                width: winSize.width*0.9,
+                                height: winSize.width*0.6,
+                            }}
+                            source={{uri: 'http://goodtogostore.com/assets/images/empty-cart.png'}}/>
                     </View>
+                }
+                <View style={shoppingCartStyles.container__qty}>
                 </View>
             </View>
         )
@@ -155,7 +174,9 @@ const mapStateToProps = state => ({
     shoppingCartState: state.order.shoppingCartState
 });
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+    removeProductFromShoppingCart
+}
 
 export default connect(
     mapStateToProps,
