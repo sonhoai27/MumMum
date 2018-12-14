@@ -14,7 +14,9 @@ import SearchSreen from "./Screens/SearchSreen";
 import OrderScreen from "./Screens/Order/OrderScreen";
 import Icons from "react-native-vector-icons/Ionicons";
 import NotifyScreen from "./Screens/NotifyScreen";
+import CheckoutScreen from "./Screens/Order/CheckoutScreen";
 
+// authencations
 const AuthStack = createStackNavigator(
     {
         Login: {screen: LoginScreen},
@@ -26,7 +28,7 @@ const AuthStack = createStackNavigator(
 );
 const AuthContainer = createAppContainer(AuthStack);
 
-
+// main routes
 const AppFoodStack = createStackNavigator(
     {
         Home: {screen: AppFoodScreen},
@@ -55,7 +57,9 @@ const OrderStack = createStackNavigator(
 );
 const AccountStack = createStackNavigator(
     {
-        Account: {screen: Account}
+        Account: {screen: Account},
+        UserInfo: {screen: CheckoutScreen},
+        ChangePassword: {screen: CheckoutScreen},
     },
     {
         initialRouteName: 'Account',
@@ -129,11 +133,10 @@ AppStack.navigationOptions = {
 const RootStack = createStackNavigator(
     {
         AppStack: {screen: AppStack},
-        Login: {screen: LoginScreen},
-        Register: {screen: RegisterScreen},
     },
     {
         initialRouteName: 'AppStack',
+        transitionConfig: () => ({ screenInterpolator: () => null }),
     }
 );
 const AppContainer = createAppContainer(RootStack);

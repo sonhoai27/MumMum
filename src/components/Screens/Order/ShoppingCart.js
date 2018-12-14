@@ -10,6 +10,8 @@ import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
 import {removeProductFromShoppingCart} from "../../../stores/order/OrderActions";
 import {winSize} from "../Restaurant/NearMe";
 import {basketIcon} from "../../Header";
+import CheckoutScreen from "./CheckoutScreen";
+import NoteAdd from "../Restaurant/NoteAdd";
 
 type SCProps = {
     navigation: any;
@@ -17,18 +19,23 @@ type SCProps = {
     removeProductFromShoppingCart: Function;
 }
 type SCStates = {
-    currentItem: number
+    modalVisible: boolean;
 }
-
 class MyShoppingCart extends React.Component<SCProps, SCStates> {
     constructor(props) {
         super(props)
         this.state = {
-            currentItem: -1
+            modalVisible: false
         }
     }
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+    }
+
+    setModalVisible() {
+        this.setState({
+            modalVisible: !this.state.modalVisible
+        });
     }
 
     totalMoney = () => {
@@ -38,17 +45,11 @@ class MyShoppingCart extends React.Component<SCProps, SCStates> {
         }
         return total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     };
+
     resItem = (item, index) => {
         return (
             <TouchableOpacity
                 style={{flex: 1}}
-                onPress={() => {
-                    this.setState({
-                        currentItem: index
-                    }, () => {
-                        console.log(this.state.currentItem === index)
-                    })
-                }}
                 onLongPress={() => {
                     Alert.alert(
                         'Thông báo',
@@ -66,7 +67,7 @@ class MyShoppingCart extends React.Component<SCProps, SCStates> {
                 }}>
                 <View style={{
                     borderBottomColor: '#eee',
-                    borderBottomWidth: this.state.currentItem === index ? 0 : 1,
+                    borderBottomWidth: 1,
                     paddingBottom: 16,
                     marginBottom: index === (this.props.shoppingCartState.length - 1) ? 100 : 0,
                     paddingTop: 16,
@@ -76,7 +77,7 @@ class MyShoppingCart extends React.Component<SCProps, SCStates> {
                     justifyContent: 'space-between',
                     flexDirection: 'row',
                     borderRadius: SIZE["8"],
-                    backgroundColor: this.state.currentItem === index ? '#dcffed' : '#fff'
+                    backgroundColor: '#fff'
                 }}>
                     <Text style={{
                         fontSize: SIZE["16"],
@@ -139,21 +140,30 @@ class MyShoppingCart extends React.Component<SCProps, SCStates> {
                         </View>
                 }
                 <View style={shoppingCartStyles.qty}>
-                    <View style={{flex: 1}}>
-                        <Text style={{
-                            fontSize: 12,
-                            color: '#fff',
-                            fontWeight: 'bold'
-                        }}>{this.props.shoppingCartState.length} mục | {this.totalMoney()}</Text>
-                        <Text style={{
-                            color: '#fff', fontSize: 10,
-                            fontWeight: 'bold'
-                        }}>104 Tăng Nhơn Phú A, Quận 9, Hồ chí Minh</Text>
-                    </View>
-                    <View>
-                        {basketIcon}
-                    </View>
+                    <TouchableOpacity
+                        onPress={()=> {
+                            this.setModalVisible();
+                        }}
+                        style={{flex: 1, flexDirection: 'row'}}>
+                        <View style={{flex: 1}}>
+                            <Text style={{
+                                fontSize: 12,
+                                color: '#fff',
+                                fontWeight: 'bold'
+                            }}>{this.props.shoppingCartState.length} mục | {this.totalMoney()}</Text>
+                            <Text style={{
+                                color: '#fff', fontSize: 10,
+                                fontWeight: 'bold'
+                            }}>104 Tăng Nhơn Phú A, Quận 9, Hồ chí Minh</Text>
+                        </View>
+                        <View>
+                            {basketIcon}
+                        </View>
+                    </TouchableOpacity>
                 </View>
+                <CheckoutScreen navigation={this.props.screenProps} modalVisible={this.state.modalVisible} setModalVisible={() => {
+                    this.setModalVisible();
+                }}/>
             </View>
         )
     }
@@ -167,8 +177,8 @@ export const shoppingCartStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         position: 'absolute',
-        right: '8%',
-        left: '8%',
+        right: SIZE["24"],
+        left: SIZE["24"],
         bottom: '4%',
         paddingVertical: SIZE["8"],
         paddingHorizontal: SIZE["16"],
