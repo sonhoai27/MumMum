@@ -2,8 +2,9 @@ import {ACTION_TYPES} from "./AddressTypes";
 import {FAILURE, REQUEST, SUCCESS} from "../../configs/ActionTypeUtil";
 
 const initialState = {
-    districts: [],
-    wardsByDistrict: []
+    districtsState: [],
+    wardsByDistrictState: [],
+    myAddressState: ''
 };
 
 export default (state = initialState, action) => {
@@ -17,7 +18,7 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_GET_ALL_DISTRICT): {
             return {
                 ...state,
-                districts: action.payload.data
+                districtsState: action.payload.data
             }
         }
 
@@ -30,7 +31,14 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_GET_WARD_BY_DISTRICT): {
             return {
                 ...state,
-                wardsByDistrict: action.payload.data
+                wardsByDistrictState: action.payload.data
+            }
+        }
+
+        case (ACTION_TYPES.SET_MY_ADDRESS): {
+            return {
+                ...state,
+                myAddressState: action.payload
             }
         }
         default: {

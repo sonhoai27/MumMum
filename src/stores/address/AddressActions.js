@@ -5,13 +5,23 @@ import {API} from "../../configs/Const";
 export const apiGetAllDistricts = () => async dispatch => {
     return await dispatch({
         type: ACTION_TYPES.API_GET_ALL_DISTRICT,
-        payload: axios.get(API+'/district/getAll')
+        payload: axios.get(API+'district/getAll')
     })
 };
 
 export const apiGetWardsByDistrict = (wardId) => async dispatch => {
     return await dispatch({
         type: ACTION_TYPES.API_GET_WARD_BY_DISTRICT,
-        payload: axios.get(API+'/ward/getAllByDistrict/'+wardId)
+        payload: axios.get(API+'ward/getAllByDistrict/', {
+            params: {
+                id: wardId
+            }
+        })
+    })
+};
+export const setMyAddress = (address) => async dispatch => {
+    return await dispatch({
+        type: ACTION_TYPES.SET_MY_ADDRESS,
+        payload: address
     })
 };
