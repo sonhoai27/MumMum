@@ -4,7 +4,8 @@ import {
     View,
     Text, TouchableOpacity, Modal, StyleSheet
 } from 'react-native'
-import {PRIMARY_COLOR} from "../../../configs/Const";
+import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
+import {navigateIcon} from "../../Header";
 type CheckoutScreenProps = {
     navigation: any;
     modalVisible: boolean;
@@ -19,14 +20,29 @@ class CheckoutScreen extends React.Component<CheckoutScreenProps> {
         return (
             <View style={{ flex: 1}}>
                 <Modal
-                    animationType="slide"
+                    animationType="none"
                     transparent={false}
                     visible={this.props.modalVisible}
                     onRequestClose={() => {
                         this.props.setModalVisible();
                     }}>
                     <View style={CheckoutScreenStyles.header}>
-                        <Text>AAAAA</Text>
+                        <Text style={CheckoutScreenStyles.header__title}>
+                            Đặt hàng
+                        </Text>
+                    </View>
+                    <View style={{flex: 1,}}>
+                        <TouchableOpacity style={CheckoutScreenStyles.address}>
+                            {navigateIcon}
+                            <View style={CheckoutScreenStyles.location}>
+                                <Text style={{fontSize: 10}}>
+                                    Địa điểm giao hàng
+                                </Text>
+                                <Text style={{fontSize: 14, fontWeight: 'bold'}}>
+                                    104 Tăng Nhơn Phú A
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </Modal>
             </View>
@@ -34,13 +50,29 @@ class CheckoutScreen extends React.Component<CheckoutScreenProps> {
     }
 }
 
-export const CheckoutScreenStyles = StyleSheet.create({
+const CheckoutScreenStyles = StyleSheet.create({
     header: {
         backgroundColor: PRIMARY_COLOR,
         height: 56,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
+    },
+    header__title: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+    address: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: SIZE["16"],
+        backgroundColor: '#fff',
+        borderBottomColor: '#eee',
+        borderBottomWidth: 1,
+    },
+    location: {
+        marginLeft: SIZE["16"]
     }
 });
 
