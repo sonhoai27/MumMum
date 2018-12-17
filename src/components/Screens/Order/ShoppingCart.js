@@ -213,7 +213,9 @@ class MyShoppingCart extends React.Component<SCProps, SCStates> {
                             <Text style={{
                                 color: '#fff', fontSize: 10,
                                 fontWeight: 'bold'
-                            }}>104 Tăng Nhơn Phú A, Quận 9, Hồ chí Minh</Text>
+                            }}>
+                                {this.props.myAddressState !== '' ? this.props.myAddressState : ''}
+                            </Text>
                         </View>
                         <View>
                             {basketIcon}
@@ -245,7 +247,8 @@ export const shoppingCartStyles = StyleSheet.create({
     },
 })
 const mapStateToProps = state => ({
-    shoppingCartState: state.order.shoppingCartState
+    shoppingCartState: state.order.shoppingCartState,
+    myAddressState: state.address.myAddressState
 });
 
 const mapDispatchToProps = {

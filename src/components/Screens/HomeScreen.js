@@ -4,10 +4,9 @@ import {
     View,
     Text, StyleSheet, ScrollView, TouchableOpacity
 } from 'react-native'
-import Header, {headerStyles, navigateIcon, searchIcon} from "../Header";
+import Header, {headerStyles, navigateIcon } from "../Header";
 import ListCategories from "./Category";
 import ListRestaurantsByNearMe from "./Restaurant/NearMe";
-import {PRIMARY_COLOR} from "../../configs/Const";
 import AddressScreen from "./Order/AddressScreen";
 type HomeStates = {
     modalVisible: boolean,
@@ -74,6 +73,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+
 }
 
 export default connect(

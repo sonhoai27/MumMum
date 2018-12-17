@@ -11,6 +11,7 @@ import Home from "./Screens/HomeScreen";
 import {PRIMARY_COLOR} from "../configs/Const";
 import {addToCart} from "../stores/order/OrderActions";
 import {_retrieveData} from "../configs/LocalStorage";
+import {setMyAddress} from "../stores/address/AddressActions";
 
 type AppFoodScreenProps = {
     addToCart: Function;
@@ -39,6 +40,11 @@ class AppFoodScreen extends React.Component<AppFoodScreenProps> {
         _retrieveData("@ORDERS", (result) => {
             if (!result.message) {
                 this.props.addToCart(this.props.shoppingCartState, result, 1);
+            }
+        })
+        _retrieveData("@ADDRESS", (result) => {
+            if (!result.message) {
+                this.props.setMyAddress(result);
             }
         })
     };
@@ -71,7 +77,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    addToCart
+    addToCart,
+    setMyAddress
 }
 
 export default connect(

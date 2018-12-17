@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {ACTION_TYPES} from "./AddressTypes";
 import {API} from "../../configs/Const";
+import {_storeData} from "../../configs/LocalStorage";
 
 export const apiGetAllDistricts = () => async dispatch => {
     return await dispatch({
@@ -19,9 +20,15 @@ export const apiGetWardsByDistrict = (wardId) => async dispatch => {
         })
     })
 };
-export const setMyAddress = (address) => async dispatch => {
-    return await dispatch({
-        type: ACTION_TYPES.SET_MY_ADDRESS,
-        payload: address
-    })
+
+export const setMyAddress = (address) => dispatch => {
+    _storeData("@ADDRESS", address, (result) => {
+        if (result.message === 200){
+            dispatch({
+                type: ACTION_TYPES.SET_MY_ADDRESS,
+                payload: address
+            })
+        }
+    });
+
 };
