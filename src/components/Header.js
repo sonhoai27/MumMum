@@ -28,6 +28,8 @@ export const removeIcon2 = (<Icon name="ios-remove" size={32} color={PRIMARY_COL
 export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR}/>);
 export const basketIcon = (<IconFeather name="shopping-bag" size={SIZE["24"]} color="#fff"/>);
 export const accountIcon = (<Icon name="ios-person" size={SIZE["24"]} color="#000"/>)
+export const constructIcon = (<Icon name="ios-construct" size={SIZE["24"]} color="#000"/>)
+export const cogIcon = (<Icon name="ios-cog" size={SIZE["24"]} color="#000"/>)
 
 type TProps = {
     title: string;

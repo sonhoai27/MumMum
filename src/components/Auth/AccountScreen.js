@@ -4,7 +4,7 @@ import {
     View,
     Text, ScrollView, Image, TouchableOpacity,
 } from 'react-native'
-import Header, {headerStyles} from "../Header";
+import Header, {cogIcon, constructIcon, editIcon, headerStyles} from "../Header";
 import {apiUserInfo} from "../../stores/auth/AuthActions";
 import {winSize} from "../Screens/Restaurant/NearMe";
 import {PRIMARY_COLOR, SIZE} from "../../configs/Const";
@@ -40,104 +40,99 @@ class AccountScreen extends React.Component<AccountProps> {
     render() {
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{flex: 1}}>
-                    <View style={{position: 'relative', paddingBottom: SIZE["64"]}}>
+                <View style={{backgroundColor: '#eee', flex: 1}}>
+                    <View style={{
+                        flexDirection: 'row',
+                        padding: SIZE["16"],
+                        backgroundColor: '#fff',
+                        marginBottom: SIZE["16"]
+                    }}>
                         <Image
                             style={{
-                                borderRadius: SIZE["16"],
-                                height: winSize.width / 2,
-                                width: winSize.width - 32,
-                                margin: 16
+                                borderRadius: SIZE["120"],
+                                height: SIZE["64"],
+                                width: SIZE["64"],
+                                marginRight: SIZE["8"],
                             }}
                             source={{uri: 'https://static.dezeen.com/uploads/2018/07/food-design-luca-verweij-dezeen-2364-sq-411x411.jpg'}}/>
                         <View style={{
-                            paddingHorizontal: SIZE["16"],
-                            paddingVertical: SIZE["8"],
-                            borderRadius: SIZE["8"],
-                            backgroundColor: PRIMARY_COLOR,
-                            position: 'absolute',
-                            left: SIZE["32"],
-                            right: SIZE["32"],
-                            bottom: 0,
-                            elevation: 2,
-                            zIndex: 1000,
+                           flexDirection: 'column',
+                            flex: 3,
                         }}>
                             <Text style={{
-                                fontSize: 18,
+                                fontSize: 14,
                                 borderBottomColor: '#eee',
                                 borderBottomWidth: 1,
-                                paddingBottom: SIZE["8"],
-                                color: '#fff',
+                                paddingBottom: SIZE["8"]
                             }}>
-                                {this.props.userInfoState.email}
+                                Linh.Nguyen
                             </Text>
                             <Text style={{
-                                fontSize: 14,
-                                marginTop: SIZE["8"],
-                                color: '#fff',
+                                fontSize: 13,
+                                marginTop: SIZE["8"]
                             }}>
                                 0986787665
                             </Text>
                             <Text style={{
                                 fontSize: 12,
-                                marginTop: SIZE["4"],
-                                color: '#fff'
+                                marginTop: SIZE["4"]
                             }}>
                                 11 Nguyễn đình chiểu
                             </Text>
                         </View>
+                        <TouchableOpacity
+                            onPress={()=> {
+                                this.props.navigation.navigate('UserInfo')
+                            }}
+                            style={{
+                            marginLeft: SIZE["8"],
+                            padding: SIZE["8"]
+                        }}>
+                            {editIcon}
+                        </TouchableOpacity>
                     </View>
-                    <View style={{
-                        marginTop: SIZE["40"],
-                        width: winSize.width-48,
-                        paddingHorizontal: SIZE["24"],
-                        justifyContent: 'space-between',
+                    <TouchableOpacity
+                        onPress={()=> {
+                            this.props.navigation.navigate('ChangePassword')
+                        }}
+                        style={{
+                        flex: 1,
                         flexDirection: 'row',
+                        padding: SIZE["16"],
+                        backgroundColor: '#fff',
                         marginBottom: SIZE["16"],
-                    }}>
-                        <View style={{
-                            elevation: 2,
-                            backgroundColor: '#fff',
-                            width: winSize.width/2-32,
-                            marginRight: 16,
-                            borderRadius: SIZE["8"],
-                            paddingHorizontal: SIZE["16"],
-                            paddingVertical: SIZE["32"],
-                            alignItems: 'center'
-                        }}>
-                            <TouchableOpacity>
-                                <Text style={headerStyles.fontWeightBold}>Cập nhật thông tin</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{
-                            elevation: 2,
-                            backgroundColor: '#ffffff',
-                            width: winSize.width/2-32,
-                            borderRadius: SIZE["8"],
-                            paddingHorizontal: SIZE["16"],
-                            paddingVertical: SIZE["32"],
-                            alignItems: 'center'
-                        }}>
-                            <TouchableOpacity>
-                                <Text style={headerStyles.fontWeightBold}>Đổi mật khẩu</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={{
                         alignItems: 'center',
-                        marginTop: SIZE["32"],
+                    }}>
+                        {cogIcon}
+                        <Text style={{marginLeft: SIZE["8"]}}>Đổi mật khẩu</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        padding: SIZE["16"],
+                        backgroundColor: '#fff',
+                        marginBottom: SIZE["16"],
+                        alignItems: 'center',
+                    }}>
+                        {constructIcon}
+                        <Text style={{marginLeft: SIZE["8"]}}>Cài đặt</Text>
+                    </TouchableOpacity>
+                    <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        padding: SIZE["16"],
+                        backgroundColor: '#fff',
+                        marginBottom: SIZE["16"],
+                        alignItems: 'center',
+                        justifyContent: 'center',
                     }}>
                         <TouchableOpacity>
-                            <Text style={
-                                [headerStyles.fontWeightBold, {
-                                    backgroundColor: PRIMARY_COLOR,
-                                    textAlign: 'center',
-                                    color: '#fff',
-                                    width: winSize.width/2,
-                                    padding: SIZE["16"],
-                                    borderRadius: SIZE["16"],
-                                }]
-                            }>Đăng xuất</Text>
+                            <Text style={{
+                                backgroundColor: PRIMARY_COLOR,
+                                color: '#fff',
+                                padding: 8,
+                                borderRadius: SIZE["8"]
+                            }}>Đăng xuất</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

@@ -15,6 +15,8 @@ import OrderScreen from "./Screens/Order/OrderScreen";
 import Icons from "react-native-vector-icons/Ionicons";
 import NotifyScreen from "./Screens/NotifyScreen";
 import CheckoutScreen from "./Screens/Order/CheckoutScreen";
+import EditAccountScreen from "./Auth/EditAccountScreen";
+import ChangePasswordScreen from "./Auth/ChangePasswordScreen";
 
 // authencations
 const AuthStack = createStackNavigator(
@@ -36,7 +38,7 @@ const AppFoodStack = createStackNavigator(
     },
     {
         initialRouteName: 'Home',
-        transitionConfig: () => ({ screenInterpolator: () => null }),
+        transitionConfig: () => ({screenInterpolator: () => null}),
     }
 );
 const SearchStack = createStackNavigator(
@@ -58,8 +60,8 @@ const OrderStack = createStackNavigator(
 const AccountStack = createStackNavigator(
     {
         Account: {screen: Account},
-        UserInfo: {screen: CheckoutScreen},
-        ChangePassword: {screen: CheckoutScreen},
+        UserInfo: {screen: EditAccountScreen},
+        ChangePassword: {screen: ChangePasswordScreen},
     },
     {
         initialRouteName: 'Account',
@@ -78,37 +80,37 @@ const AppStack = createBottomTabNavigator(
     {
         Home: {
             screen: AppFoodStack,
-            navigationOptions: ({ navigation }) => ({
+            navigationOptions: ({navigation}) => ({
                 title: "Trang chủ",
-                tabBarIcon: ({ tintColor }) => <Icons name="ios-home" size={20} color={tintColor}/>
+                tabBarIcon: ({tintColor}) => <Icons name="ios-home" size={20} color={tintColor}/>
             })
         },
         Search: {
             screen: SearchStack,
-            navigationOptions: ({ navigation }) => ({
+            navigationOptions: ({navigation}) => ({
                 title: "Tìm kiếm",
-                tabBarIcon: ({ tintColor }) => <Icons name="ios-search" size={20} color={tintColor}/>
+                tabBarIcon: ({tintColor}) => <Icons name="ios-search" size={20} color={tintColor}/>
             })
         },
         Order: {
             screen: OrderStack,
-            navigationOptions: ({ navigation }) => ({
+            navigationOptions: ({navigation}) => ({
                 title: "Giỏ hàng",
-                tabBarIcon: ({ tintColor }) => <Icons name="ios-basket" size={20} color={tintColor}/>
+                tabBarIcon: ({tintColor}) => <Icons name="ios-basket" size={20} color={tintColor}/>
             })
         },
         Notify: {
             screen: NotifyStack,
-            navigationOptions: ({ navigation }) => ({
+            navigationOptions: ({navigation}) => ({
                 title: "Thông báo",
-                tabBarIcon: ({ tintColor }) => <Icons name="ios-notifications" size={20} color={tintColor}/>
+                tabBarIcon: ({tintColor}) => <Icons name="ios-notifications" size={20} color={tintColor}/>
             })
         },
-        User:  {
+        User: {
             screen: AccountStack,
-            navigationOptions: ({ navigation }) => ({
+            navigationOptions: ({navigation}) => ({
                 title: "Tài khoản",
-                tabBarIcon: ({ tintColor }) => <Icons name="ios-contacts" size={20} color={tintColor}/>
+                tabBarIcon: ({tintColor}) => <Icons name="ios-contacts" size={20} color={tintColor}/>
             })
         }
     },
@@ -136,7 +138,7 @@ const RootStack = createStackNavigator(
     },
     {
         initialRouteName: 'AppStack',
-        transitionConfig: () => ({ screenInterpolator: () => null }),
+        transitionConfig: () => ({screenInterpolator: () => null}),
     }
 );
 const AppContainer = createAppContainer(RootStack);
@@ -144,6 +146,7 @@ const AppContainer = createAppContainer(RootStack);
 type BaseComponentProps = {
     navigation: any;
 }
+
 class HomeRoute extends React.Component<BaseComponentProps> {
     static navigationOptions = {
         header: null,
@@ -152,15 +155,16 @@ class HomeRoute extends React.Component<BaseComponentProps> {
     constructor(props) {
         super(props)
     }
+
     componentDidMount(): void {
         this.props.setMyGeoLocation({
             latitude: '10.773533',
             longitude: '106.702899'
         });
         _retrieveData("@LOGIN", (result) => {
-            if (result.message === 400){
+            if (result.message === 400) {
                 this.props.setStatusLogin(false);
-            }else {
+            } else {
                 this.props.setStatusLogin(true);
                 this.props.setUserToken(result)
             }
@@ -168,14 +172,10 @@ class HomeRoute extends React.Component<BaseComponentProps> {
     }
 
     render() {
-        if (this.props.isLoginState){
-            return (
-                <AppContainer/>
-            )
-        } else {
-            return <AuthContainer/>
-        }
 
+        return (
+            this.props.isLoginState ? <AppContainer/> : <AuthContainer/>
+        )
     }
 }
 
