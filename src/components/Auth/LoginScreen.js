@@ -96,83 +96,81 @@ class LoginScreen extends React.Component<LoginProps, LoginState> {
         }
     }
 
-    renderModalConfimMail = () => {
-        return (
-            <Modal
-                hardwareAccelerated={true}
-                animationType="fade"
-                transparent={true}
-                visible={this.state.modalVisible}
-                onRequestClose={() => {
-                    this.setState({
-                       modalVisible: !this.state.modalVisible
-                    })
-                }}>
+    renderModalConfimMail = () => (
+        <Modal
+            hardwareAccelerated={true}
+            animationType="fade"
+            transparent={true}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+                this.setState({
+                    modalVisible: !this.state.modalVisible
+                })
+            }}>
+            <View style={{
+                elevation: 8,
+                backgroundColor: "#fafafa",
+                paddingVertical: SIZE["16"],
+                paddingHorizontal: SIZE["32"],
+                borderRadius: SIZE["8"],
+                position: 'absolute',
+                top: '10%',
+                left: '10%',
+                right: '10%'
+            }}>
+                <Text style={{
+                    textAlign:'center',
+                    fontWeight: 'bold',
+                    fontSize: SIZE["16"]
+                }}>Kích hoạt tài khoản.</Text>
+
                 <View style={{
-                    elevation: 8,
-                    backgroundColor: "#fafafa",
-                    paddingVertical: SIZE["16"],
-                    paddingHorizontal: SIZE["32"],
-                    borderRadius: SIZE["8"],
-                    position: 'absolute',
-                    top: '10%',
-                    left: '10%',
-                    right: '10%'
+                    marginTop: SIZE["24"],
+                    backgroundColor: '#eee',
+                    paddingHorizontal: SIZE["8"],
+                    height: SIZE["40"],
+                    position: 'relative',
+                }}>
+                    <TextInput
+                        onChangeText ={(e) => {
+                            this.setState({
+                                verifyEmail: e
+                            })
+                        }}
+                        placeholder={'Email của bạn'}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            textAlign:'center',
+                        }}/>
+                </View>
+                <TouchableOpacity onPress={()=> {
+                    if (this.state.verifyEmail !== ""){
+                        this.props.apiReSendToke(this.state.verifyEmail)
+                    }else {
+                        Alert.alert(
+                            'Cảnh báo',
+                            'Email rỗng.',
+                            [
+                                {text: 'OK', onPress: () => console.log('OK Pressed')},
+                            ],
+                            { cancelable: true }
+                        );
+                    }
                 }}>
                     <Text style={{
-                        textAlign:'center',
-                        fontWeight: 'bold',
-                        fontSize: SIZE["16"]
-                    }}>Kích hoạt tài khoản.</Text>
-
-                    <View style={{
-                        marginTop: SIZE["24"],
-                        backgroundColor: '#eee',
-                        paddingHorizontal: SIZE["8"],
-                        height: SIZE["40"],
-                        position: 'relative',
-                    }}>
-                        <TextInput
-                            onChangeText ={(e) => {
-                                this.setState({
-                                    verifyEmail: e
-                                })
-                            }}
-                            placeholder={'Email của bạn'}
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
-                                textAlign:'center',
-                        }}/>
-                    </View>
-                    <TouchableOpacity onPress={()=> {
-                        if (this.state.verifyEmail !== ""){
-                            this.props.apiReSendToke(this.state.verifyEmail)
-                        }else {
-                            Alert.alert(
-                                'Cảnh báo',
-                                'Email rỗng.',
-                                [
-                                    {text: 'OK', onPress: () => console.log('OK Pressed')},
-                                ],
-                                { cancelable: true }
-                            );
-                        }
-                    }}>
-                        <Text style={{
-                            backgroundColor: PRIMARY_COLOR,
-                            color: '#fff',
-                            padding: 10,
-                            textAlign:'center'
-                        }}>Kích hoạt</Text>
-                    </TouchableOpacity>
-                </View>
-            </Modal>
-        )
-    };
+                        backgroundColor: PRIMARY_COLOR,
+                        color: '#fff',
+                        padding: 10,
+                        textAlign:'center'
+                    }}>Kích hoạt</Text>
+                </TouchableOpacity>
+            </View>
+        </Modal>
+    )
 
     renderModalForgetPassword = () => {
         return (

@@ -6,12 +6,14 @@ import {navigateIcon} from '../../Header';
 import {distanceFrom} from '../../../configs/distanceBetween2Points'
 import AddressScreen from './AddressScreen';
 import {setMyAddress} from "../../../stores/address/AddressActions";
+import {makeMyAddress} from "../../../configs/makeAddress";
 
 type CheckoutScreenProps = {
     navigation: any,
     modalVisible: boolean,
     setModalVisible: Function,
-    shoppingCartState: any
+    shoppingCartState: any;
+    myGeolocationState: any;
 };
 
 type CheckoutScreenStates = {
@@ -26,7 +28,6 @@ class CheckoutScreen extends React.Component<CheckoutScreenProps, CheckoutScreen
             modalVisible: false
         }
     }
-
     setModalVisible() {
         this.setState({
             modalVisible: !this.state.modalVisible
@@ -48,8 +49,8 @@ class CheckoutScreen extends React.Component<CheckoutScreenProps, CheckoutScreen
         return (distanceFrom({
             'lat1': 10.773533,
             'lng1': 106.702899,
-            'lat2': 10.7723477,
-            'lng2': 106.7429439
+            'lat2': this.props.myGeolocationState.latitude,
+            'lng2': this.props.myGeolocationState.longitude
         }) * 4000) + (this.totalMoney())
     }
 
@@ -75,7 +76,7 @@ class CheckoutScreen extends React.Component<CheckoutScreenProps, CheckoutScreen
                             <View style={CheckoutScreenStyles.location}>
                                 <Text style={{fontSize: 10}}>Địa điểm giao hàng</Text>
                                 <Text style={{fontSize: 14, fontWeight: 'bold'}}>
-                                    {this.props.myAddressState !== '' ? this.props.myAddressState : 'Chọn!'}
+                                    {this.props.myAddressState !== '' ? makeMyAddress(this.props.myAddressState) : 'Chọn!'}
                                 </Text>
                             </View>
                         </TouchableOpacity>
@@ -95,8 +96,8 @@ class CheckoutScreen extends React.Component<CheckoutScreenProps, CheckoutScreen
                             <Text>{this.formatMoney(distanceFrom({
                                 'lat1': 10.773533,
                                 'lng1': 106.702899,
-                                'lat2': 10.7723477,
-                                'lng2': 106.7429439
+                                'lat2': this.props.myGeolocationState.latitude,
+                                'lng2': this.props.myGeolocationState.longitude
                             }) * 4000)}</Text>
                         </View>
                         <View style={CheckoutScreenStyles.calc__item}>
@@ -107,7 +108,7 @@ class CheckoutScreen extends React.Component<CheckoutScreenProps, CheckoutScreen
                             >
                                 Tổng thanh toán
                             </Text>
-                            <Text>{this.formatMoney(this.total())}</Text>
+                            <Text>{this.total() ? this.formatMoney(this.total()) : 'Đang tính toán'}</Text>
                         </View>
                     </View>
                     <View style={{flex: 1, marginBottom: SIZE[16]}}>
@@ -180,7 +181,8 @@ export const CheckoutScreenStyles = StyleSheet.create({
 
 const mapStateToProps = state => ({
     shoppingCartState: state.order.shoppingCartState,
-    myAddressState: state.address.myAddressState
+    myAddressState: state.address.myAddressState,
+    myGeolocationState: state.lists.myGeolocationState
 });
 
 const mapDispatchToProps = {

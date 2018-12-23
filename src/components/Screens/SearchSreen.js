@@ -2,12 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {
     View,
-    Text, StyleSheet, ScrollView, TouchableOpacity
+    Text, StyleSheet, ScrollView, TouchableOpacity, TextInput
 } from 'react-native'
-import Header, {headerStyles, navigateIcon, searchIcon} from "../Header";
-import ListCategories from "./Category";
-import ListRestaurantsByNearMe from "./Restaurant/NearMe";
-import {PRIMARY_COLOR} from "../../configs/Const";
+import {headerStyles, navigateIcon} from "../Header";
+import {PRIMARY_COLOR, SIZE} from "../../configs/Const";
 
 class SearchSreen extends React.Component {
     static navigationOptions = {
@@ -44,17 +42,20 @@ class SearchSreen extends React.Component {
     render() {
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{ flex: 1, backgroundColor: '#fff'}}>
-                    {this.renderMyAdress()}
-                    <ListCategories/>
-                    <ListRestaurantsByNearMe navigation={this.props.navigation}/>
-
+                <View style={{ flex: 1, backgroundColor: '#fff', padding: SIZE["16"]}}>
+                    <TextInput style={searchScreenstyles.input} placeholder={'Bạn muốn tìm gì?'}/>
                 </View>
             </ScrollView>
         )
     }
 }
-const styles = StyleSheet.create({})
+const searchScreenstyles = StyleSheet.create({
+    input: {
+        backgroundColor: '#eee',
+        borderRadius: SIZE["8"],
+        paddingHorizontal: SIZE["16"],
+    }
+})
 const mapStateToProps = state => ({
 });
 

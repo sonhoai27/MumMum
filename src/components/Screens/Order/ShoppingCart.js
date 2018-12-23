@@ -12,6 +12,7 @@ import {winSize} from "../Restaurant/NearMe";
 import {addIcon, basketIcon, editIcon, removeIcon2} from "../../Header";
 import CheckoutScreen from "./CheckoutScreen";
 import NoteAdd from "../Restaurant/NoteAdd";
+import {makeMyAddress} from "../../../configs/makeAddress";
 
 type SCProps = {
     navigation: any;
@@ -214,7 +215,7 @@ class MyShoppingCart extends React.Component<SCProps, SCStates> {
                                 color: '#fff', fontSize: 10,
                                 fontWeight: 'bold'
                             }}>
-                                {this.props.myAddressState !== '' ? this.props.myAddressState : ''}
+                                {this.props.myAddressState !== '' ? makeMyAddress(this.props.myAddressState) : ''}
                             </Text>
                         </View>
                         <View>

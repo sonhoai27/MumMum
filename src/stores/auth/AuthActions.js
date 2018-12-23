@@ -57,4 +57,14 @@ export const apiUserInfo= (token) => async dispatch => {
             }
         })
     })
+};
+export  const updateInfo = (form, token) => async dispatch => {
+    return await dispatch({
+        type: ACTION_TYPES.API_UPDATE_INFO,
+        payload: axios.post(API+'updateInfo', form,{
+            headers: {
+                Authorization : "Bearer "+token
+            }
+        })
+    })
 }

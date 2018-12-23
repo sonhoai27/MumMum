@@ -4,18 +4,22 @@ import {
     View,
     Text, ScrollView, Image, TouchableOpacity,
 } from 'react-native'
-import Header, {cogIcon, constructIcon, editIcon, headerStyles} from "../Header";
+import Header, {cogIcon, constructIcon, editIcon, headerStyles, navigateIcon2} from "../Header";
 import {apiUserInfo} from "../../stores/auth/AuthActions";
 import {winSize} from "../Screens/Restaurant/NearMe";
 import {PRIMARY_COLOR, SIZE} from "../../configs/Const";
+import AddressScreen from "../Screens/Order/AddressScreen";
 
 type AccountProps = {
     userInfoState: any;
     userState: any;
     apiUserInfo: Function;
 }
-
-class AccountScreen extends React.Component<AccountProps> {
+type AccountStates = {
+    modalVisible: boolean,
+    setModalVisible: Function,
+}
+class AccountScreen extends React.Component<AccountProps, AccountStates> {
     static navigationOptions = {
         title: 'Tài khoản',
         headerStyle: {
@@ -31,8 +35,15 @@ class AccountScreen extends React.Component<AccountProps> {
     };
     constructor(props) {
         super(props)
+        this.state = {
+            modalVisible: false
+        }
     }
-
+    setModalVisible() {
+        this.setState({
+            modalVisible: !this.state.modalVisible
+        });
+    }
     componentDidMount(): void {
         this.props.apiUserInfo(this.props.userState.token)
     }
@@ -92,6 +103,21 @@ class AccountScreen extends React.Component<AccountProps> {
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity
+                        onPress={() => {
+                            this.setModalVisible();
+                        }}
+                        style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            padding: SIZE["16"],
+                            backgroundColor: '#fff',
+                            marginBottom: SIZE["16"],
+                            alignItems: 'center',
+                        }}>
+                        {navigateIcon2}
+                        <Text style={{marginLeft: SIZE["8"]}}>Địa chỉ</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
                         onPress={()=> {
                             this.props.navigation.navigate('ChangePassword')
                         }}
@@ -136,6 +162,11 @@ class AccountScreen extends React.Component<AccountProps> {
                         </TouchableOpacity>
                     </View>
                 </View>
+                <AddressScreen
+                    modalVisible={this.state.modalVisible}
+                    setModalVisible={() => {
+                        this.setModalVisible();
+                    }}/>
             </ScrollView>
         )
     }

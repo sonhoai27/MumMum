@@ -12,7 +12,7 @@ import {
 import {apiGetRestaurantsByNearMe} from "../../../stores/lists/ListActions";
 import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
 import {albumsIcon, headerStyles} from "../../Header";
-import {listCateStyles} from "../Category";
+import {listCateStyles} from "../Category/Category";
 
 export const winSize = Dimensions.get('window');
 
@@ -25,16 +25,6 @@ type TProps = {
 class ListRestaurantsByNearMe extends React.Component<TProps> {
     constructor(props) {
         super(props)
-    }
-
-    componentDidMount(): void {
-        this.props.apiGetRestaurantsByNearMe(
-            this.props.myGeolocationState.latitude,
-            this.props.myGeolocationState.longitude
-        )
-    }
-
-    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
     }
     resItem = (item) => (
         <TouchableWithoutFeedback onPress={() => {

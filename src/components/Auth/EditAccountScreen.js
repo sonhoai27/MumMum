@@ -6,9 +6,24 @@ import {
     TextInput, StyleSheet
 } from 'react-native'
 import {PRIMARY_COLOR, SIZE} from "../../configs/Const";
-import {cogIcon} from "../Header";
+import {apiUserInfo, updateInfo} from "../../stores/auth/AuthActions";
 
-class EditAccountScreen extends React.Component<BaseComponentProps> {
+type EditAccountScreenStates = {
+    userName: string,
+    street: string,
+    phone: number,
+}
+type EditAccountScreenProps = {
+    navigation?: any;
+    apiUserInfo: Function;
+    updateInfo: Function;
+    userInfoState: any;
+    userState: any;
+    updateInfoState: any;
+    myAddressState: any;
+}
+
+class EditAccountScreen extends React.Component<EditAccountScreenProps, EditAccountScreenStates> {
     static navigationOptions = ({navigation}) => {
         return {
             title: 'Thông tin tài khoản người dùng',
@@ -26,8 +41,39 @@ class EditAccountScreen extends React.Component<BaseComponentProps> {
     };
 
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            street: '',
+            phone: 0,
+            userName: ''
+
+        }
     }
+    componentDidMount(): void {
+        this.props.apiUserInfo(this.props.userState.token);
+    }
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+        if(prevProps.userInfoState !== this.props.userInfoState){
+            this.setState({
+                street: this.props.userInfoState.address.street,
+                phone: this.props.userInfoState.phone,
+                userName: this.props.userInfoState.userName
+            })
+        }
+    }
+
+    onChange = (name, e) => {
+        this.setState({
+            [name]: e,
+        })
+    };
+    onSave = () => {
+        this.props.updateInfo({
+            ...this.state,
+            idDistrict: this.props.myAddressState[0].split('|')[1],
+            idWard: this.props.myAddressState[1].split('|')[1],
+        }, this.props.userState.token);
+    };
 
     render() {
         return (
@@ -35,23 +81,25 @@ class EditAccountScreen extends React.Component<BaseComponentProps> {
                 <View style={{flex: 1, backgroundColor: '#eee'}}>
                     <View style={editAccountStyles.input}>
                         <Text style={editAccountStyles.title}>Tên người dùng</Text>
-                        <TextInput placeholder={'Tên người dùng'}/>
+                        <TextInput
+                            defaultValue={this.props.userInfoState.userName}
+                            onChangeText={(e)=>this.onChange('userName', e)}
+                            placeholder={'Tên người dùng'}/>
                     </View>
                     <View style={editAccountStyles.input}>
                         <Text style={editAccountStyles.title}>Số điện thoại</Text>
-                        <TextInput placeholder={'Số điện thoại'}/>
+                        <TextInput
+                            defaultValue={this.props.userInfoState.phone}
+                            keyboardType={'phone-pad'}
+                            onChangeText={(e)=>this.onChange('phone', e)}
+                            placeholder={'Số điện thoại'}/>
                     </View>
                     <View style={editAccountStyles.input}>
                         <Text style={editAccountStyles.title}>Đường</Text>
-                        <TextInput placeholder={'Đường'}/>
-                    </View>
-                    <View style={editAccountStyles.input}>
-                        <Text style={editAccountStyles.title}>Phường</Text>
-                        <TextInput placeholder={'Phường'}/>
-                    </View>
-                    <View style={editAccountStyles.input}>
-                        <Text style={editAccountStyles.title}>Quận</Text>
-                        <TextInput placeholder={'Quận'}/>
+                        <TextInput
+                            defaultValue={this.props.userInfoState.address.street}
+                            onChangeText={(e)=>this.onChange('street', e)}
+                            placeholder={'Đường'}/>
                     </View>
                 </View>
                 <View style={{
@@ -60,7 +108,7 @@ class EditAccountScreen extends React.Component<BaseComponentProps> {
                     marginTop: SIZE["32"],
                     marginBottom: SIZE["32"]
                 }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.onSave}>
                         <Text style={{
                             backgroundColor: PRIMARY_COLOR,
                             color: '#fff',
@@ -88,9 +136,17 @@ export const editAccountStyles = StyleSheet.create({
         paddingTop: SIZE["8"]
     }
 })
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    userInfoState: state.auth.userInfoState,
+    userState: state.auth.userState,
+    myAddressState: state.address.myAddressState,
+    updateInfoState: state.auth.updateInfoState,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+    apiUserInfo,
+    updateInfo
+};
 
 export default connect(
     mapStateToProps,

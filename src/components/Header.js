@@ -26,6 +26,7 @@ export const checkmarkSuccessIcon = (size: number) => (<Icon name="ios-checkmark
 export const removeIcon = (<Icon name="ios-remove-circle-outline" size={32} color="#fff"/>)
 export const removeIcon2 = (<Icon name="ios-remove" size={32} color={PRIMARY_COLOR}/>)
 export const navigateIcon = (<Icon name="ios-navigate" size={20} color={PRIMARY_COLOR}/>);
+export const navigateIcon2 = (<Icon name="ios-navigate" size={24} color='#000'/>);
 export const basketIcon = (<IconFeather name="shopping-bag" size={SIZE["24"]} color="#fff"/>);
 export const accountIcon = (<Icon name="ios-person" size={SIZE["24"]} color="#000"/>)
 export const constructIcon = (<Icon name="ios-construct" size={SIZE["24"]} color="#000"/>)

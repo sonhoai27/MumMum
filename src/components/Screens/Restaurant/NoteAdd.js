@@ -58,11 +58,9 @@ class NoteAdd extends React.Component<NoteAddProps> {
                                 color: '#fff',
                                 fontSize: SIZE["16"],
                                 paddingVertical: 12,
-                                borderRadius: SIZE["8"]
                             }}>Chấp nhận</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={noteAddStyles.bg2}/>
                 </Modal>
             </View>
         )
@@ -80,8 +78,6 @@ export const noteAddStyles = StyleSheet.create({
         bottom: 0,
         padding: SIZE["16"],
         elevation: 8,
-        borderTopRightRadius: SIZE["24"],
-        borderTopLeftRadius: SIZE["24"],
         height: winSize.height*0.45,
         zIndex: 100
     },
@@ -94,21 +90,6 @@ export const noteAddStyles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#000',
         fontSize: SIZE["16"]
-    },
-    bg2: {
-        backgroundColor: '#eee',
-        position: 'absolute',
-        left: 12,
-        right: 12,
-        flex: 1,
-        marginTop: SIZE["32"],
-        bottom: 0,
-        padding: SIZE["16"],
-        elevation: 8,
-        borderTopRightRadius: SIZE["16"],
-        borderTopLeftRadius: SIZE["16"],
-        height: winSize.height*0.47,
-        zIndex: 90
     },
     textAreaContainer: {
         borderColor: '#eee',
@@ -125,6 +106,6 @@ export const noteAddStyles = StyleSheet.create({
         left: 0,
         right: 0
     }
-})
+});
 
 export default NoteAdd;

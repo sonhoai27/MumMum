@@ -65,6 +65,7 @@ class RestaurantScreen extends React.Component<RestaurantProps, RestaurantState>
     };
     constructor(props) {
         super(props)
+        console.log(this.props.navigation);
     }
 
     render() {

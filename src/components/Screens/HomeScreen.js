@@ -5,9 +5,10 @@ import {
     Text, StyleSheet, ScrollView, TouchableOpacity
 } from 'react-native'
 import Header, {headerStyles, navigateIcon } from "../Header";
-import ListCategories from "./Category";
+import ListCategories from "./Category/Category";
 import ListRestaurantsByNearMe from "./Restaurant/NearMe";
 import AddressScreen from "./Order/AddressScreen";
+import {makeMyAddress} from "../../configs/makeAddress";
 type HomeStates = {
     modalVisible: boolean,
     setModalVisible: Function,
@@ -43,7 +44,7 @@ class Home extends React.Component<{}, HomeStates> {
                 }}>
                     {navigateIcon}
                     <Text style={headerStyles.addressTitle__adress}>
-                        {this.props.myAddressState !== '' ? this.props.myAddressState : 'Chọn!'}
+                        {this.props.myAddressState !== '' ? makeMyAddress(this.props.myAddressState) : 'Chọn!'}
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -54,7 +55,7 @@ class Home extends React.Component<{}, HomeStates> {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ flex: 1, backgroundColor: '#fff'}}>
                     {this.renderMyAdress()}
-                    <ListCategories/>
+                    <ListCategories navigation={this.props.navigation}/>
                     <ListRestaurantsByNearMe navigation={this.props.navigation}/>
 
                 </View>

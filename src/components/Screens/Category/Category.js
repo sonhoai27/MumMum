@@ -12,6 +12,7 @@ import {SIZE} from "../../../configs/Const";
 import {headerStyles} from "../../Header";
 
 type TProps = {
+    navigation: any;
     categoriesState?: any;
     apiGetCategories?: Function;
 }
@@ -28,7 +29,14 @@ class ListCategories extends React.Component<TProps> {
             flex: 1,
             marginLeft: 20
         }}>
-            <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center'}}>
+            <TouchableOpacity
+                onPress={()=> {
+                    this.props.navigation.navigate('ResByCat', {
+                        item: item,
+                        title: item.name,
+                    });
+                }}
+                style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Image style={{
                     width: SIZE["64"],
                     height: SIZE["64"],
