@@ -8,7 +8,8 @@ const initialState = {
     menuOfResState: [],
     menuOfResCategoriesState: [],
     menuOfResPagesState: [],
-    searchResByNameState: []
+    searchResByNameState: [],
+    currentRestaurant: 0,
 };
 
 export default (state = initialState, action) => {
@@ -97,6 +98,13 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 searchResByNameState: action.payload.data
+            }
+        }
+
+        case (ACTION_TYPES.CURRENT_RESTAURANT): {
+            return {
+                ...state,
+                currentRestaurant: action.payload
             }
         }
         default: {

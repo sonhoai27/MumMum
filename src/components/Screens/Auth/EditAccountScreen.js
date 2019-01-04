@@ -5,8 +5,8 @@ import {
     Text, TouchableOpacity, ScrollView,
     TextInput, StyleSheet
 } from 'react-native'
-import {PRIMARY_COLOR, SIZE} from "../../configs/Const";
-import {apiUserInfo, updateInfo} from "../../stores/auth/AuthActions";
+import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
+import {apiUserInfo, updateInfo} from "../../../stores/auth/AuthActions";
 
 type EditAccountScreenStates = {
     userName: string,

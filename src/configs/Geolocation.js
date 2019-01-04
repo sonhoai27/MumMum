@@ -8,7 +8,7 @@ export const getGeolocation = (cb)=> {
             })
         },
         (error) => cb({ error: error.message }),
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 3000 },
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10 },
     );
-}
+};
 

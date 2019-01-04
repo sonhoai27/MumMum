@@ -4,7 +4,7 @@ import {
     View,
     Text, TextInput, StyleSheet, TouchableOpacity
 } from 'react-native'
-import {PRIMARY_COLOR, SIZE} from "../../configs/Const";
+import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
 import {editAccountStyles} from "./EditAccountScreen";
 
 class ChangePasswordScreen extends React.Component {

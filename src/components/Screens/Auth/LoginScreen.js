@@ -10,10 +10,10 @@ import {
     ScrollView,
     Modal, Alert
 } from 'react-native'
-import {SIZE, PRIMARY_COLOR} from "../../configs/Const";
-import {apiForgetPassword, apiLogin, apiReSendToke, setStatusLogin} from "../../stores/auth/AuthActions";
-import {_storeData} from "../../configs/LocalStorage";
-import {headerStyles} from "../Header";
+import {SIZE, PRIMARY_COLOR} from "../../../configs/Const";
+import {apiForgetPassword, apiLogin, apiReSendToke, setStatusLogin} from "../../../stores/auth/AuthActions";
+import {_storeData} from "../../../configs/LocalStorage";
+import {headerStyles} from "../../Header";
 
 const winSize = Dimensions.get('window');
 

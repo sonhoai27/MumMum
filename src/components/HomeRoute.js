@@ -1,13 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {_retrieveData} from "../configs/LocalStorage";
-import LoginScreen from "./Auth/LoginScreen";
-import {setStatusLogin, setUserToken} from "../stores/auth/AuthActions";
+import LoginScreen from "./Screens/Auth/LoginScreen";
+import {apiUserInfo, setStatusLogin, setUserToken} from "../stores/auth/AuthActions";
 import {apiGetRestaurantsByNearMe, setMyGeoLocation} from "../stores/lists/ListActions";
 import AppFoodScreen from "./AppFoodScreen";
 import {createAppContainer, createBottomTabNavigator, createStackNavigator} from "react-navigation";
-import Account from "./Auth/AccountScreen";
-import RegisterScreen from "./Auth/RegisterScreen";
+import Account from "./Screens/Auth/AccountScreen";
+import RegisterScreen from "./Screens/Auth/RegisterScreen";
 import {PRIMARY_COLOR} from "../configs/Const";
 import Restaurant from "./Screens/Restaurant/RestaurantScreen";
 import RestaurantByCatScreen from "./Screens/Category/RestaurantByCatScreen";
@@ -16,8 +16,8 @@ import OrderScreen from "./Screens/Order/OrderScreen";
 import Icons from "react-native-vector-icons/Ionicons";
 import NotifyScreen from "./Screens/NotifyScreen";
 import CheckoutScreen from "./Screens/Order/CheckoutScreen";
-import EditAccountScreen from "./Auth/EditAccountScreen";
-import ChangePasswordScreen from "./Auth/ChangePasswordScreen";
+import EditAccountScreen from "./Screens/Auth/EditAccountScreen";
+import ChangePasswordScreen from "./Screens/Auth/ChangePasswordScreen";
 import {getGeolocation} from "../configs/Geolocation";
 
 // authencations
@@ -148,6 +148,7 @@ const AppContainer = createAppContainer(RootStack);
 
 type BaseComponentProps = {
     navigation: any;
+    apiUserInfo: Function;
 }
 
 class HomeRoute extends React.Component<BaseComponentProps> {
@@ -173,6 +174,7 @@ class HomeRoute extends React.Component<BaseComponentProps> {
             } else {
                 this.props.setStatusLogin(true);
                 this.props.setUserToken(result)
+                this.props.apiUserInfo(result.token)
             }
         })
     }
@@ -204,7 +206,9 @@ const mapDispatchToProps = {
     setMyGeoLocation,
     setStatusLogin,
     setUserToken,
-    apiGetRestaurantsByNearMe
+    apiGetRestaurantsByNearMe,
+    apiUserInfo
+
 }
 
 export default connect(

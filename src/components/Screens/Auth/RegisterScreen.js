@@ -11,9 +11,9 @@ import {
     ScrollView,
     Alert
 } from 'react-native'
-import {SIZE, PRIMARY_COLOR} from "../../configs/Const";
-import {apiRegister} from "../../stores/auth/AuthActions";
-import {rootStyles} from "../AppFoodScreen";
+import {SIZE, PRIMARY_COLOR} from "../../../configs/Const";
+import {apiRegister} from "../../../stores/auth/AuthActions";
+import {rootStyles} from "../../AppFoodScreen";
 
 const winSize = Dimensions.get('window');
 

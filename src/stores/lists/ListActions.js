@@ -51,3 +51,9 @@ export const searchResByName = (nameId) => dispatch => {
         payload: axios.get(API + 'restaurant/search/' + nameId)
     })
 }
+export const setRestaurantId = (id) => dispatch => {
+    return dispatch({
+        type: ACTION_TYPES.CURRENT_RESTAURANT,
+        payload: id,
+    })
+}

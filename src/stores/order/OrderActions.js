@@ -3,17 +3,21 @@ import {ACTION_TYPES} from "./OrderTypes";
 import {API} from "../../configs/Const";
 import {_removeData, _retrieveData, _storeData} from "../../configs/LocalStorage";
 
-export const apiCreateOrder = (totalPrice, Street, districtId, wardId, phone, item) => async dispatch => {
+export const apiCreateOrder = (order, token) => async dispatch => {
     return await dispatch({
         type: ACTION_TYPES.API_CREATE_ORDER,
-        payload: axios.post(API+'/order/create')
+        payload: axios.post(API+'order/create/v2', order, {
+            headers: {
+                Authorization : "Bearer "+token
+            }
+        })
     })
 };
 
 export const apiGetAllHistoryOrderOfUser= (token) => async dispatch => {
     return await dispatch({
         type: ACTION_TYPES.API_GET_ALL_HISTORY_ORDER_OF_USER,
-        payload: axios.get(API+'/order/getAll', {
+        payload: axios.get(API+'order/getAll', {
             headers: {
                 Authorization : "Bearer "+token
             }
@@ -24,11 +28,18 @@ export const apiGetAllHistoryOrderOfUser= (token) => async dispatch => {
 export const apiGetDetailOrderById= (token) => async dispatch => {
     return await dispatch({
         type: ACTION_TYPES.API_GET_DETAIL_ORDER_BY_ID,
-        payload: axios.get(API+'/order/getOrder/+id', {
+        payload: axios.get(API+'order/getOrder/+id', {
             headers: {
                 Authorization : "Bearer "+token
             }
         })
+    })
+}
+
+export const setNullCart = () =>  dispatch => {
+    return dispatch({
+        type: ACTION_TYPES.SHOPPING_CART,
+        payload: []
     })
 }
 

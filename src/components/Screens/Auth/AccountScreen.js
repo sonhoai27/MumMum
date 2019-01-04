@@ -4,11 +4,11 @@ import {
     View,
     Text, ScrollView, Image, TouchableOpacity,
 } from 'react-native'
-import Header, {cogIcon, constructIcon, editIcon, headerStyles, navigateIcon2} from "../Header";
-import {apiUserInfo} from "../../stores/auth/AuthActions";
-import {winSize} from "../Screens/Restaurant/NearMe";
-import {PRIMARY_COLOR, SIZE} from "../../configs/Const";
-import AddressScreen from "../Screens/Order/AddressScreen";
+import Header, {cogIcon, constructIcon, editIcon, headerStyles, navigateIcon2} from "../../Header";
+import {apiUserInfo} from "../../../stores/auth/AuthActions";
+import {winSize} from "../Restaurant/NearMe";
+import {PRIMARY_COLOR, SIZE} from "../../../configs/Const";
+import AddressScreen from "../Order/AddressScreen";
 
 type AccountProps = {
     userInfoState: any;

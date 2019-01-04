@@ -12,6 +12,7 @@ import {PRIMARY_COLOR} from "../configs/Const";
 import {addToCart} from "../stores/order/OrderActions";
 import {_retrieveData} from "../configs/LocalStorage";
 import {setMyAddress} from "../stores/address/AddressActions";
+import {apiUserInfo} from "../stores/auth/AuthActions";
 
 type AppFoodScreenProps = {
     addToCart: Function;

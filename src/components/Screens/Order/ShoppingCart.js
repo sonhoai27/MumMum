@@ -11,7 +11,6 @@ import {addToCart, removeProductFromShoppingCart} from "../../../stores/order/Or
 import {winSize} from "../Restaurant/NearMe";
 import {addIcon, basketIcon, editIcon, removeIcon2} from "../../Header";
 import CheckoutScreen from "./CheckoutScreen";
-import NoteAdd from "../Restaurant/NoteAdd";
 import {makeMyAddress} from "../../../configs/makeAddress";
 
 type SCProps = {
@@ -109,17 +108,6 @@ class MyShoppingCart extends React.Component<SCProps, SCStates> {
                     paddingRight: SIZE["8"],
                     justifyContent: 'flex-end',
                 }}>
-                    <TouchableOpacity
-                        style={{
-                            elevation: 2,
-                            borderRadius: SIZE["4"],
-                            padding: 4,
-                            marginRight: SIZE["16"],
-                            backgroundColor: '#fff'
-                        }
-                        }>
-                        {editIcon}
-                    </TouchableOpacity>
                     <View style={{
                         borderRadius: SIZE["4"],
                         justifyContent: 'space-between',
