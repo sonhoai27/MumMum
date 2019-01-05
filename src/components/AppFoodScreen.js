@@ -46,6 +46,8 @@ class AppFoodScreen extends React.Component<AppFoodScreenProps> {
         _retrieveData("@ADDRESS", (result) => {
             if (!result.message) {
                 this.props.setMyAddress(result);
+            }else {
+                this.props.setMyAddress('');
             }
         })
     };
