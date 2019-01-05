@@ -47,7 +47,7 @@ class AppFoodScreen extends React.Component<AppFoodScreenProps> {
             if (!result.message) {
                 this.props.setMyAddress(result);
             }else {
-                this.props.setMyAddress('');
+                this.props.setMyAddress([]);
             }
         })
     };
